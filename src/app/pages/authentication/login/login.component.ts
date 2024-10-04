@@ -5,6 +5,7 @@ import { AxiosService } from 'src/app/services/axios.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class AppSideLoginComponent {
   @Output() onSubmitLoginEvent = new EventEmitter();
