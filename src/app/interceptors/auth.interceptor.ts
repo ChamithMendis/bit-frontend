@@ -1,5 +1,30 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+// import { AuthService } from '../services/auth.service';
+import { AxiosService } from '../services/axios.service';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  return next(req);
-};
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  constructor(private axiosService: AxiosService) {}
+
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    const authUser = this.axiosService.getAuthUser();
+    if (authUser && authUser.data && authUser.data.token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${authUser.data.token}`,
+        },
+      });
+    }
+    return next.handle(request);
+  }
+}

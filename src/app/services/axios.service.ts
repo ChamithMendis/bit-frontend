@@ -1,4 +1,3 @@
-import { H } from '@angular/cdk/keycodes';
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from '../environments/environment';
@@ -22,6 +21,16 @@ export class AxiosService {
     } else {
       window.localStorage.removeItem('auth_token');
     }
+  }
+
+  setAuthUser(userData: any) {
+    if (userData !== null) {
+      window.localStorage.setItem('auth_user', JSON.stringify(userData));
+    }
+  }
+
+  getAuthUser() {
+    return JSON.parse(window.localStorage.getItem('auth_user') as string);
   }
 
   removeToken() {
@@ -48,5 +57,11 @@ export class AxiosService {
       return true;
     }
     return false;
+  }
+
+  public logOut(): void {
+    this.request('GET', '/logout', {}).then((response) => {
+      window.localStorage.removeItem('auth_token');
+    });
   }
 }

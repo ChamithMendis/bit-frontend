@@ -27,6 +27,7 @@ export class AppSideLoginComponent {
       })
       .then((response) => {
         this.axiosService.setAuthToken(response.data.token);
+        this.axiosService.setAuthUser(response.data);
         this.router.navigate(['/dashboard']);
       });
   }

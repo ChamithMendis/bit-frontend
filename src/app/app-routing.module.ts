@@ -2,12 +2,31 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
-import { NotFoundError } from 'rxjs';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
+    component: BlankComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/authentication/login',
+        pathMatch: 'full',
+      },
+      {
+        path: 'authentication',
+        loadChildren: () =>
+          import('./pages/authentication/authentication.module').then(
+            (m) => m.AuthenticationModule
+          ),
+      },
+    ],
+  },
+  {
+    path: '',
     component: FullComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -34,22 +53,9 @@ const routes: Routes = [
     ],
   },
   {
-    path: '',
+    path: '**',
     component: BlankComponent,
-    children: [
-      {
-        path: 'authentication',
-        loadChildren: () =>
-          import('./pages/authentication/authentication.module').then(
-            (m) => m.AuthenticationModule
-          ),
-      },
-    ],
   },
-  // {
-  //   path: '**',
-  //   component: NotFoundError,
-  // },
 ];
 
 @NgModule({
