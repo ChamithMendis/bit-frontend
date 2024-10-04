@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import { NotFoundError } from 'rxjs';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
       },
     ],
   },
+  // {
+  //   path: '**',
+  //   component: NotFoundError,
+  // },
 ];
 
 @NgModule({

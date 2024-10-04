@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
+import { AxiosService } from 'src/app/services/axios.service';
 
 @Component({
   selector: 'app-header',
@@ -22,5 +22,11 @@ export class HeaderComponent {
 
   showFiller = false;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private axiosService: AxiosService) {}
+
+  public logOutUser(): void {
+    this.axiosService.request('GET', '/logout', {}).then((response) => {
+      this.axiosService.removeToken();
+    });
+  }
 }
