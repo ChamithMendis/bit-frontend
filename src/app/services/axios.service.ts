@@ -12,26 +12,26 @@ export class AxiosService {
   }
 
   getAuthToken(): string | null {
-    return window.localStorage.getItem('auth_token');
+    return JSON.parse(window.localStorage.getItem('auth_token') as string);
   }
 
   setAuthToken(token: string | null): void {
     if (token !== null) {
-      window.localStorage.setItem('auth_token', token);
+      window.localStorage.setItem('auth_token', JSON.stringify(token));
     } else {
       window.localStorage.removeItem('auth_token');
     }
   }
 
-  setAuthUser(userData: any) {
-    if (userData !== null) {
-      window.localStorage.setItem('auth_user', JSON.stringify(userData));
-    }
-  }
+  // setAuthUser(userData: any) {
+  //   if (userData !== null) {
+  //     window.localStorage.setItem('auth_user', JSON.stringify(userData));
+  //   }
+  // }
 
-  getAuthUser() {
-    return JSON.parse(window.localStorage.getItem('auth_user') as string);
-  }
+  // getAuthUser() {
+  //   return JSON.parse(window.localStorage.getItem('auth_user') as string);
+  // }
 
   removeToken() {
     window.localStorage.removeItem('auth_token');

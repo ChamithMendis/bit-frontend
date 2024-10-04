@@ -17,11 +17,11 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const authUser = this.axiosService.getAuthUser();
-    if (authUser && authUser.data && authUser.data.token) {
+    const authToken = this.axiosService.getAuthToken();
+    if (authToken) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${authUser.data.token}`,
+          Authorization: `Bearer ${authToken}`,
         },
       });
     }

@@ -14,8 +14,8 @@ export class AuthGuard implements CanActivate {
   constructor(private axiosService: AxiosService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const authUser = this.axiosService.getAuthUser();
-    if (authUser) {
+    const authToken = this.axiosService.getAuthToken();
+    if (authToken) {
       return true;
     }
     this.router.navigate(['/authentication/login'], {
