@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
 import { environment } from '../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AxiosService {
-  constructor() {
-    axios.defaults.baseURL = environment.baseUrl;
-    axios.defaults.headers.post['Content-type'] = 'application/json';
-  }
+  constructor(private http: HttpClient) {}
 
   getAuthToken(): string | null {
     return JSON.parse(window.localStorage.getItem('auth_token') as string);
@@ -23,33 +20,22 @@ export class AxiosService {
     }
   }
 
-  // setAuthUser(userData: any) {
-  //   if (userData !== null) {
-  //     window.localStorage.setItem('auth_user', JSON.stringify(userData));
-  //   }
-  // }
-
-  // getAuthUser() {
-  //   return JSON.parse(window.localStorage.getItem('auth_user') as string);
-  // }
-
   removeToken() {
     window.localStorage.removeItem('auth_token');
   }
 
-  request(method: string, url: string, data: any) {
+  request(method: string, url: string, data: any): Promise<any> {
+    const requestUrl = environment.baseUrl + url;
+
     let headers = {};
 
     if (this.getAuthToken() !== null) {
       headers = { Authorization: 'Bearer ' + this.getAuthToken() };
     }
 
-    return axios({
-      method: method,
-      url: url,
-      data: data,
-      headers: headers,
-    });
+    // if (method === 'POST') {
+    return this.http.post(requestUrl, data, { headers: headers }).toPromise();
+    // }
   }
 
   get isLoggedIn() {

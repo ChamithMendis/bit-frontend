@@ -43,8 +43,8 @@ export class AppSideRegisterComponent implements OnInit {
         password: this.password,
       })
       .then((response: any) => {
-        this.axiosService.setAuthToken(response.data.token);
-        this.router.navigate(['/login']);
+        this.axiosService.setAuthToken(response.token);
+        this.router.navigate(['/authentication/login']);
       });
   }
 }

@@ -26,7 +26,7 @@ export class AppSideLoginComponent {
         password: this.password,
       })
       .then((response) => {
-        this.axiosService.setAuthToken(response.data.token);
+        this.axiosService.setAuthToken(response.token);
         this.router.navigate(['/dashboard']);
       });
   }
