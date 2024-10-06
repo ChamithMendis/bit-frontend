@@ -50,7 +50,6 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     ReactiveFormsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
-    FormsModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

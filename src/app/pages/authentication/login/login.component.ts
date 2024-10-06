@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AxiosService } from 'src/app/services/axios.service';
 
@@ -7,27 +8,36 @@ import { AxiosService } from 'src/app/services/axios.service';
   templateUrl: './login.component.html',
 })
 export class AppSideLoginComponent {
-  @Output() onSubmitLoginEvent = new EventEmitter();
+  loginForm: FormGroup;
+  submitted = false;
 
-  login: string = '';
-  password: string = '';
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private axiosService: AxiosService
+  ) {
+    this.loginForm = this.formBuilder.group({
+      loginName: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+  }
 
-  constructor(private router: Router, private axiosService: AxiosService) {}
+  get formControl() {
+    return this.loginForm?.controls;
+  }
 
   onSubmitLogin(): void {
-    this.onSubmitLoginEvent.emit({
-      login: this.login,
-      password: this.password,
-    });
-
-    this.axiosService
-      .request('POST', '/login', {
-        login: this.login,
-        password: this.password,
-      })
-      .then((response) => {
-        this.axiosService.setAuthToken(response.token);
-        this.router.navigate(['/dashboard']);
-      });
+    this.submitted = true;
+    if (this.loginForm?.valid) {
+      this.axiosService
+        .request('POST', '/login', {
+          login: this.loginForm.value.loginName,
+          password: this.loginForm.value.password,
+        })
+        .then((response) => {
+          this.axiosService.setAuthToken(response.token);
+          this.router.navigate(['/dashboard']);
+        });
+    }
   }
 }
