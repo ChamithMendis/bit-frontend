@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AxiosService } from 'src/app/services/axios.service';
 
@@ -8,43 +13,49 @@ import { AxiosService } from 'src/app/services/axios.service';
   templateUrl: './register.component.html',
 })
 export class AppSideRegisterComponent implements OnInit {
-  data: string[] = [];
-  password: string = '';
-  firstName: string = '';
-  lastName: string = '';
-  login: string = '';
+  registerForm: FormGroup;
+  submitted = false;
+  // data: string[] = [];
 
-  constructor(private router: Router, private axiosService: AxiosService) {}
-
-  ngOnInit(): void {
-    this.axiosService
-      .request('GET', '/messages', null)
-      .then((response: any) => {
-        this.data = response;
-      });
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private axiosService: AxiosService
+  ) {
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      login: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
   }
 
-  form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-  });
+  ngOnInit(): void {
+    // this.axiosService
+    //   .request('GET', '/messages', null)
+    //   .then((response: any) => {
+    //     this.data = response;
+    //   });
+  }
 
-  get f() {
-    return this.form.controls;
+  get formControl() {
+    return this.registerForm?.controls;
   }
 
   onSubmitRegister() {
-    this.axiosService
-      .request('POST', '/register', {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        login: this.login,
-        password: this.password,
-      })
-      .then((response: any) => {
-        this.axiosService.setAuthToken(response.token);
-        this.router.navigate(['/authentication/login']);
-      });
+    this.submitted = true;
+    if (this.registerForm?.valid) {
+      this.axiosService
+        .request('POST', '/register', {
+          firstName: this.registerForm.value.firstName,
+          lastName: this.registerForm.value.lastName,
+          login: this.registerForm.value.login,
+          password: this.registerForm.value.password,
+        })
+        .then((response: any) => {
+          this.axiosService.setAuthToken(response.token);
+          this.router.navigate(['/authentication/login']);
+        });
+    }
   }
 }
