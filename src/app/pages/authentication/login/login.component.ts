@@ -10,6 +10,7 @@ import { AxiosService } from 'src/app/services/axios.service';
 export class AppSideLoginComponent {
   loginForm: FormGroup;
   submitted = false;
+  userNamePasswordError = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,6 +38,9 @@ export class AppSideLoginComponent {
         .then((response) => {
           this.axiosService.setAuthToken(response.token);
           this.router.navigate(['/dashboard']);
+        })
+        .catch((error) => {
+          this.userNamePasswordError = true;
         });
     }
   }

@@ -77,6 +77,11 @@
                 >Forgot Password ?</a
               >
             </div>
+
+            <span class="text-danger m-b-12" *ngIf="userNamePasswordError">
+              Username or password incorrect
+            </span>
+
             <button
               mat-flat-button
               color="primary"
