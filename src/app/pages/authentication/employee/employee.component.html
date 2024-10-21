@@ -1,0 +1,87 @@
+<div class="blank-layout-container   bg-light-primary">
+    <div class=" row w-100 h-100 bg-gredient">
+        <div class="col-lg-4">
+            <mat-card class="cardWithShadow boxed-auth">
+                <mat-card-header>
+                    <h3>Employee Registration</h3>
+                </mat-card-header>
+                <mat-card-content class="p-32">
+
+                    <form [formGroup]="userForm" class="m-t-30" (submit)="onSaveUser()">
+
+                        <mat-label for="id" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">ID</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input type="text" class="form-control" formControlName="id" matInput />
+                        </mat-form-field>
+
+                        <mat-label for="firstName" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">First Name</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input type="text" class="form-control" formControlName="firstName" matInput /> 
+
+                            <!-- <div class="text-danger" *ngIf="userForm.controls?.['firstName'].touched">
+                                <span *ngIf="userForm.controls?.['firstName'].errors?.['required']"> This is required</span>
+                                <span *ngIf="userForm.controls?.['firstName'].errors?.['minlength']"> This is Min length</span>
+                            </div> -->
+
+                            <div class="text-danger" *ngIf="userForm?.controls?.['firstName']?.touched">
+                                <span *ngIf="userForm?.controls?.['firstName']?.errors?.['required']"> This is required</span>
+                                <span *ngIf="userForm?.controls?.['firstName']?.errors?.['minlength']"> This is Min length</span>
+                              </div>
+                        </mat-form-field> 
+
+                        <mat-label for="lastName" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Last
+                            Name</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input type="text" class="form-control" formControlName="lastName" matInput />
+                        </mat-form-field>
+
+                        <mat-label for="email" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input type="text" class="form-control" formControlName="email" matInput />
+                        </mat-form-field>
+
+                        <button mat-flat-button color="primary" class="w-100" type="submit">
+                            Register
+                        </button>
+                        <!-- input -->
+                    </form>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-6">
+            <mat-card class="cardWithShadow boxed-auth">
+                <mat-card-header>
+                    <h3>Employee Registration</h3>
+                </mat-card-header>
+                <mat-card-content class="p-32">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>ID</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of usersArray">
+                                <td>{{user.id}}</td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.username}}</td>
+                                <td>{{user.email}}</td>
+                                <td>
+                                    <button mat-raised-button class="button custom-button"
+                                        (click)="onEdit(user.id)">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

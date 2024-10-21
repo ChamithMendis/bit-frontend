@@ -1,0 +1,28 @@
+div,button,h2{
+    margin-top: 1px;
+    margin-left: 10px;
+}
+
+.text-danger{
+    color: red;
+font-weight: bold;
+}
+
+form .ng-valid {
+    background-color: lightgreen !important;
+}
+// form .ng-invalid {
+//     background-color: rgb(234, 138, 138) !important;
+// }
+
+// form .ng-dirty{ //modified values by user
+// background-color: yellow !important;
+// }
+
+// form .ng-touched{ //touched by user
+// background-color: lightcoral !important;
+// }
+
+// form .ng-pristine{ //in intial state
+// background-color: lightcoral !important;
+// }

@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+.custom-button {
+  background-color: #04581c !important; /* Custom yellow color */
+  color: rgb(255, 255, 255) !important; /* Text color */
+  border: none; /* Remove borders */
+  padding: 10px 20px; /* Padding inside the button */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Change cursor on hover */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.custom-button:hover {
+  background-color: #0b8d1c !important; /* Slightly darker yellow on hover */
+}
+
+
+
+.custom-button:active {
+  background-color: #075a16 !important; /* Even darker when clicked */
+}
+
+.custom-button:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add shadow on focus */
+}
+/* Style for disabled buttons */
+.custom-button:disabled {
+  background-color: #155e15 !important; /* Gray background */
+  color: #ffffff !important; /* Light gray text color */
+  cursor: not-allowed; /* Show not-allowed cursor */
+  opacity: 0.6; /* Make it semi-transparent */
+  border: none; /* Optional: Ensure no border */
+}
+
+.custom-button:disabled:hover {
+  background-color: #ccc !important; /* No hover effect */
+}
+
+.text-red{
+  text-align: center !important;
+   color: red !important;
+   font-size: 11px;
+}
+
+
+
+// error field label color
+:root {
+  --mdc-filled-text-field-error-label-text-color: #ff0000 !important;  // Red
+}

@@ -1,0 +1,111 @@
+<h2>Customer Form Demo</h2>
+<h5>Template Driven Form</h5>
+<form #f="ngForm">
+    <div>
+        <label for="firstName">First Name:
+            <input type="text" name="firstName" id="firstName" [(ngModel)]="customer.firstName" required minlength="2"
+                maxlength="10" #firstName="ngModel" />
+            <p class="text-danger" [hidden]="!firstName.errors?.['minlength'] || firstName.pristine">
+                <!-- {{firstName.errors | json}} -->
+                Input is too short. Please add more Data
+            </p>
+            <p class="text-danger" [hidden]="!firstName.errors?.['required'] || firstName.pristine">
+                This is a Required field
+            </p>
+        </label>
+    </div>
+    <div>
+        <label for="lastName">Last Name:
+            <input type="text" name="lastName" id="lastName" [(ngModel)]="customer.lastName" required minlength="2"
+                maxlength="10" #lastName="ngModel" />
+            <p class="text-danger" [hidden]="!lastName.errors?.['minlength']">
+                <!-- {{firstName.errors | json}} -->
+                Input is too short. Please add more Data
+            </p>
+            <p class="text-danger" [hidden]="!lastName.errors?.['required']">
+                This is a Required field
+            </p>
+        </label>
+    </div>
+    <div>
+        <label for="revenue">Yearly Revenue:
+            <input type="number" name="revenue" id="revenue" [(ngModel)]="customer.revenue" />
+        </label>
+    </div>
+    <div>
+        <label for="isActive">Is Active ?:
+            <input type="checkbox" name="isActive" id="isActive" [(ngModel)]="customer.isActive" />
+        </label>
+    </div>
+
+    <div>
+        <label for="">
+            <select name="customerType" id="customerType" [(ngModel)]="customer.type">
+                <option>Type A</option>
+                <option>Type B</option>
+            </select>
+        </label>
+    </div>
+
+    <button type="button" [disabled]="!f.form.valid">Save</button>
+</form>
+
+<br />
+<hr />
+<br />
+
+<h5>Reactive Form</h5>
+<!-- ============================================================================================================= -->
+
+<form [formGroup]="tripForm" (submit)="onSubmit()">
+    <div>
+        <label for="firstName">First Name:
+            <input type="text" name="firstName" id="firstName" formControlName="firstName" />
+        </label>
+        <div class="text-danger" *ngIf="
+        tripForm.controls['firstName'].invalid &&
+        (tripForm.controls['firstName'].touched ||
+          tripForm.controls['firstName'].dirty)
+      ">
+            <span *ngIf="tripForm.controls['firstName'].errors?.['required']">This Form is Required</span>
+            <span *ngIf="tripForm.controls['firstName'].errors?.['minlength']">Please insert 5 or More numbers</span>
+            <span *ngIf="tripForm.controls['firstName'].errors?.['pattern']">Please start with Capital letter and not
+                include any number</span>
+        </div>
+    </div>
+    <div>
+        <label for="lastName">Last Name:
+            <input type="text" formControlName="lastName" />
+        </label>
+        <div class="text-danger" *ngIf="
+        tripForm.controls['lastName'].invalid &&
+        (tripForm.controls['lastName'].touched ||
+          tripForm.controls['lastName'].dirty)
+      ">
+            <span *ngIf="tripForm.controls['lastName'].errors?.['required']">This Form is Required</span>
+            <span *ngIf="tripForm.controls['lastName'].errors?.['minlength']">Please insert 5 or More numbers.
+            </span>
+            <span *ngIf="tripForm.controls['lastName'].errors?.['pattern']">
+                Start with Capital letter and not include any number</span>
+        </div>
+    </div>
+    <div>
+        <label for="salary">Salary:
+            <input type="text" name="salary" id="salary" formControlName="salary" />
+        </label>
+        <div class="text-danger" *ngIf="
+        tripForm.controls['salary'].invalid &&
+        (tripForm.controls['salary'].touched ||
+          tripForm.controls['salary'].dirty)
+      ">
+            <span *ngIf="tripForm.controls['salary'].errors?.['required']">This Form is Required</span>
+            <span *ngIf="tripForm.controls['salary'].errors?.['minlength']">Please insert 5 or More numbers.
+            </span>
+            <span *ngIf="tripForm.controls['salary'].errors?.['pattern']">
+                Start with Capital letter and not include any number</span>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="!tripForm.valid">Save</button>
+    <!-- <button type="submit">Save</button> -->
+</form>

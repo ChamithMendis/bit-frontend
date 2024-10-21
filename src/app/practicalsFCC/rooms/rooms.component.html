@@ -1,0 +1,18 @@
+<p [hidden]="hiddenValue">rooms works!</p>
+
+<div>Good morning {{name}}</div>
+<div [innerText]="roomsCount"> </div>
+
+<button mat-raised-button color="primary"  (click)="toggle()">Click me</button>
+
+<input type="text" [(ngModel)]="empName">
+<p>{{empName}}</p>
+
+<!-- <input type="text" (click)="typeValue($event.target.value)"> -->
+<input type="text" (input)="typeValue($event)">
+<pre>
+<div *ngIf="rooms.availableRooms>0">
+ Room List {{roomList|json}}
+</div>
+
+</pre>

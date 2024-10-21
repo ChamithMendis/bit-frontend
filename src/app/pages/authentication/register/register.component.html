@@ -1,17 +1,11 @@
 <div class="blank-layout-container justify-content-center align-items-center bg-light-primary">
-  <div
-    class="position-relative row w-100 h-100 bg-gredient justify-content-center"
-  >
+  <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
     <div class="col-lg-4 d-flex align-items-center">
       <mat-card class="cardWithShadow boxed-auth">
         <mat-card-content class="p-32">
           <div class="text-center">
             <a [routerLink]="['/dashboard']">
-              <img
-                src="./assets/images/logos/dark-logo.svg"
-                class="align-middle m-2"
-                alt="logo"
-              />
+              <img src="./assets/images/logos/dark-logo.svg" class="align-middle m-2" alt="logo" />
             </a>
           </div>
 
@@ -50,25 +44,19 @@
           <!-- <div class="or-border m-t-30">or sign up with</div> -->
 
           <form (ngSubmit)="onSubmitRegister()" class="m-t-30">
-            <mat-label for="firstName" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-              >First Name</mat-label
-            >
+            <mat-label for="firstName" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">First Name</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input type="text" id="firstName" name="firstName" [(ngModel)] = "firstName" matInput />
+              <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" matInput />
             </mat-form-field>
 
-            <mat-label for="lastName" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-              >Last Name</mat-label
-            >
+            <mat-label for="lastName" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Last Name</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input type="text" id="lastName" name="lastName" [(ngModel)] = "lastName" matInput />
+              <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" matInput />
             </mat-form-field>
 
-            <mat-label for="login" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-              >User Name</mat-label
-            >
+            <mat-label for="login" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">User Name</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input type="text" id="login" name="login" [(ngModel)] = "login" matInput />
+              <input type="text" id="login" name="login" [(ngModel)]="login" matInput />
             </mat-form-field>
 
 
@@ -79,11 +67,9 @@
               <input id="email" name="email" [(ngModel)] = "email" matInput type="email" />
             </mat-form-field> -->
             <!-- password -->
-            <mat-label for="password" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-              >Password</mat-label
-            >
+            <mat-label for="password" class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Password</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input id="password" name="password" [(ngModel)] = "password" matInput type="password" />
+              <input id="password" name="password" [(ngModel)]="password" matInput type="password" />
             </mat-form-field>
 
             <button mat-flat-button color="primary" class="w-100" type="submit">
@@ -91,15 +77,10 @@
             </button>
             <!-- input -->
           </form>
-          <span class="d-block f-w-500 text-center m-t-24"
-            >Already have an Account?
+          <span class="d-block f-w-500 text-center m-t-24">Already have an Account?
 
-            <a
-              [routerLink]="['/authentication/login']"
-              class="text-decoration-none text-primary f-w-500 f-s-14"
-            >
-              Sign In</a
-            >
+            <a [routerLink]="['/authentication/login']" class="text-decoration-none text-primary f-w-500 f-s-14">
+              Sign In</a>
           </span>
         </mat-card-content>
       </mat-card>

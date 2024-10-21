@@ -1,0 +1,296 @@
+mat-card {
+  width: 100%;
+  height: 100%;
+  margin: 0px 10px -6px 10px !important;
+  background-color: rgba(0, 0, 0, 0.59) !important;
+}
+
+#embody {
+  background: url("/assets/images/backgrounds/computer.jpg") !important;
+}
+
+mat-label {
+  background-color: #071b40 !important;
+  color:white !important;
+}
+
+mat-label span{
+  color: black !important;
+}
+
+/* Patient Form > Photo Panel */
+#imgpanel {
+  height: 180px;
+  margin-bottom: 30px;
+}
+
+#imgpanel img {
+  height: 180px;
+  width: 180px;
+}
+
+#selectbutton,
+#clearbutton {
+  width: 50px;
+  display: block;
+  margin-left: 200px;
+  margin-bottom: 5px;
+  background-color: #000000;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#selectbutton {
+  margin-top: -100px;
+}
+
+
+.searchheader {
+  background-color: rgba(227, 157, 61, 0.01);
+}
+
+.fntsiz {
+  font-size: 10px;
+}
+
+#ssearch mat-card-content {
+  padding-top: 20px;
+}
+
+.selected-row {
+  background-color: #dcc73d !important;
+}
+
+.mat-row:hover {
+  background-color: inherit !important;
+
+}
+
+mat-select {
+  background-color: white !important;
+  width: 90%;
+  border-radius: 10px;
+}
+
+.mat-select-panel label {
+  background-color: green !important;
+}
+
+
+// #empform mat-form-field .ng-dirty {
+//   background-color: #dcc73d !important;
+// }
+
+#ssearch {
+  background-color: rgba(255, 255, 255, 0.2);
+  height: 224px;
+}
+
+/*colors of add form field*/
+
+#empform input.ng-pristine {
+ background-color: #c6e8e4;
+}
+
+mat-select.ng-touched.ng-pristine {
+  background-color: #c6e8e4 !important;
+}
+
+#empform input.ng-touched.ng-invalid {
+  background-color: #fdc3c3;
+}
+
+mat-select.ng-touched.ng-invalid {
+
+  background-color: #fdc3c3 !important;
+}
+
+mat-select.ng-touched.ng-invalid {
+  background-color: #fdc3c3 !important;
+}
+
+
+
+
+
+
+
+#empform input.ng-touched.ng-valid {
+  background-color: #b9f6b9;
+  font-size: 100%;
+  padding-left: 10px;
+
+}
+
+mat-select.ng-touched.ng-valid {
+  background-color: #b9f6b9 !important;
+  font-size: 100%;
+  padding-left: 10px;
+
+}
+
+
+input{
+  border: 2px solid rgb(28, 119, 133) !important;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+#ssearch mat-form-field {
+  padding-left: 15px;
+  width: 250px;
+  border-radius: 5px;
+}
+
+mat-label {
+  text-align: center !important;
+}
+
+#addBtn{
+  color: white !important;
+
+}
+
+
+
+mat-form-field input,
+mat-label {
+  background-color: #fcfcfc;
+  height: 30px;
+  width: 90%;
+  color: #000000;
+  border-radius: 10px;
+  align-content: center;
+  padding-left: 5px;
+
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  border: 1px solid #021e22 !important;
+  background-color: #ffffff98 !important;
+}
+
+
+
+mat-table mat-form-field {
+  background-color: #ffffff;
+  height: 40px;
+  border-radius: 15px;
+}
+
+
+/* Clinic Form */
+#empform {
+  padding-top: 20px;
+
+}
+
+#empcard {
+  width: 80%;
+}
+
+
+/* Employee Form > Button Panel */
+#butpanel {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#butpanel button {
+  width: 62px;
+  margin: 3px;
+  background-image: linear-gradient(to left, #153473, black, black);
+  color: white;
+  border-radius: 5px;
+}
+
+#ssearch button {
+  width: 150px;
+  margin-left: 10px;
+  margin-top: 5px;
+  background-image: linear-gradient(to left, black, black, rgb(0, 21, 255));
+color: white;
+  border-radius: 5px;
+}
+
+// #cbody {
+//   background: url("/src/assets/images/backgrounds/ebg.jpg");
+//   background-repeat: round;
+// }
+
+mat-header-row,
+mat-row,
+ng-container,
+mat-header-cell,
+mat-cell {
+  border-radius: 5px;
+
+}
+
+
+
+.csearch {
+  height: 40px;
+  width: 110%;
+  margin-top: 15px;
+}
+
+mat-header-cell,
+mat-header-row {
+  background-color: #4f3408;
+  color: white;
+}
+
+
+// .bgopacity {
+//   background-color: rgba(255, 255, 255, 0.2);
+//   /* Set the desired background color with opacity */
+//   color: black;
+//   /* Set the desired text color for the table */
+//   border-radius: 10px;
+
+// }
+
+
+
+
+/* Customize the track (background) */
+::-webkit-scrollbar-track {
+  background-color: #b00606 !important;
+}
+
+/* Customize the thumb (the draggable scrolling element) */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(81, 199, 69, 0.32) !important;
+  border-radius: 5px;
+}
+
+/* Change the cursor style on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #0d3379 !important;
+}
+
+/* Customize the corner of the scroll bar */
+::-webkit-scrollbar-corner {
+  background-color: #8b12cb !important;
+}
+
+
+
+mat-card-content {
+  overflow: auto;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+mat-card-header {
+  background-image: linear-gradient(to left, #0048ff, #153473, black, black, black);
+  color: #ffffff;
+  border-radius: 0px;
+  padding-top: 5px;
+}

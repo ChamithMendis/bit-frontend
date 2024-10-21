@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'Modernize Angular Admin Tempplate';
+  title = 'Angular pro 2024';
+
 }
 
 
-// .custom-button {
-//   background-color: #3498db; /* Custom blue color */
-//   color: white; /* Text color */
-// }
+

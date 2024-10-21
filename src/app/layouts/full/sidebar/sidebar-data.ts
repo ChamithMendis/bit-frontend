@@ -51,6 +51,16 @@ export const navItems: NavItem[] = [
     route: '/authentication/register',
   },
   {
+    displayName: 'Employee',
+    iconName: 'man',
+    route: '/authentication/employee',
+  },
+  {
+    displayName: 'Angular Forms',
+    iconName: 'brand-angular',
+    route: '/authentication/angularForms',
+  },
+  {
     navCap: 'Extra',
   },
   {
