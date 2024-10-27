@@ -50,4 +50,16 @@ export class AxiosService {
       window.localStorage.removeItem('auth_token');
     });
   }
+
+  public getAuthIds(userId: number): Promise<any> {
+    const requestUrl = environment.baseUrl + '/get-auth-ids/' + userId;
+
+    let headers = {};
+
+    if (this.getAuthToken() !== null) {
+      headers = { Authorization: 'Bearer ' + this.getAuthToken() };
+    }
+
+    return this.http.get(requestUrl, { headers: headers }).toPromise();
+  }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { navItems } from './sidebar-data';
 import { NavService } from '../../../services/nav.service';
+import { CacheService } from 'src/app/services/CacheService';
+import { elementAt, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,8 +10,27 @@ import { NavService } from '../../../services/nav.service';
 })
 export class SidebarComponent implements OnInit {
   navItems = navItems;
+  data!: number[];
+  private cacheSubscription!: Subscription;
 
-  constructor(public navService: NavService) {}
+  constructor(
+    public navService: NavService,
+    private cacheService: CacheService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cacheSubscription = this.cacheService.cache$.subscribe((data) => {
+      this.data = data;
+
+      this.setAuthStatusInNavItems(this.data);
+    });
+  }
+
+  public setAuthStatusInNavItems(authId: number[]) {
+    navItems.forEach((element) => {
+      if (authId.includes(element.auth!)) {
+        element.isVisible = true;
+      }
+    });
+  }
 }

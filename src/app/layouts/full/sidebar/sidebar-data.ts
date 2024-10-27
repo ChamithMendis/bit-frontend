@@ -1,8 +1,11 @@
 import { NavItem } from './nav-item/nav-item';
+import { authenticationEnum } from '../../../guards/auth.enum';
 
 export const navItems: NavItem[] = [
   {
     navCap: 'Home',
+    auth: authenticationEnum.Home,
+    isVisible: false,
   },
   {
     displayName: 'Dashboard',
