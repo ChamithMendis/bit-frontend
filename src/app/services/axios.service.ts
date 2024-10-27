@@ -62,4 +62,28 @@ export class AxiosService {
 
     return this.http.get(requestUrl, { headers: headers }).toPromise();
   }
+
+  getSystemPrivileges(): Promise<any> {
+    const requestUrl = environment.baseUrl + '/system-privileges';
+
+    let headers = {};
+
+    if (this.getAuthToken() !== null) {
+      headers = { Authorization: 'Bearer ' + this.getAuthToken() };
+    }
+
+    return this.http.get(requestUrl, { headers: headers }).toPromise();
+  }
+
+  saveSystemPrivileges(data: any): Promise<any> {
+    const requestUrl = environment.baseUrl + '/system-privileges';
+
+    let headers = {};
+
+    if (this.getAuthToken() !== null) {
+      headers = { Authorization: 'Bearer ' + this.getAuthToken() };
+    }
+
+    return this.http.put(requestUrl, data, { headers: headers }).toPromise();
+  }
 }
