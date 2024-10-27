@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AxiosService } from 'src/app/services/axios.service';
+import { CacheService } from 'src/app/services/CacheService';
 
 @Component({
   selector: 'app-system-privileges',
@@ -18,7 +19,10 @@ export class SystemPrivilegesComponent implements OnInit {
   targetTableData = new MatTableDataSource<any>([]);
   targetSelection = new SelectionModel<any>(true, []);
 
-  constructor(private axiosService: AxiosService) {}
+  constructor(
+    private axiosService: AxiosService,
+    private cacheService: CacheService
+  ) {}
 
   ngOnInit(): void {
     this.axiosService.getSystemPrivileges().then((response: any) => {

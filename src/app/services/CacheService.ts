@@ -22,6 +22,7 @@ export class CacheService {
     // If there is no data for this key, we store it in the cache and update the BehaviorSubject.
     this.cache.set(key, data);
     this.cache$.next(this.cache.get(key)!);
+    window.localStorage.setItem('privileges', JSON.stringify(data));
   }
 
   // The 'get' method for retrieving data from the cache.
