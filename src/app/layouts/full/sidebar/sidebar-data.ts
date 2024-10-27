@@ -66,4 +66,14 @@ export const navItems: NavItem[] = [
     iconName: 'aperture',
     route: '/extra/sample-page',
   },
+  {
+    navCap: 'Privileges',
+    auth: authenticationEnum.Home, // change this
+    isVisible: true,
+  },
+  {
+    displayName: 'System Privileges',
+    iconName: 'layout-dashboard',
+    route: '/privileges//system-privileges',
+  },
 ];
