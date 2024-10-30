@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { PrivilegesService } from 'src/app/services/privileges/privileges.service';
+import { PrivilegeGroupsAddEditComponent } from '../privilege-groups-add-edit/privilege-groups-add-edit.component';
 
 @Component({
   selector: 'app-privilege-groups',
@@ -23,33 +25,62 @@ export class PrivilegeGroupsComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private _dialog: MatDialog // private _empService: EmployeeService, // private _coreService: CoreService
+    private _dialog: MatDialog,
+    private _privilegesService: PrivilegesService // private _empService: EmployeeService, // private _coreService: CoreService
   ) {}
 
   ngOnInit(): void {
-    // this.getPrivilegeGroupList();
+    try {
+      this.getPrivilegeGroupList();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  openAddEditEmpForm() {
-    // const dialogRef = this._dialog.open(EmpAddEditComponent);
-    // dialogRef.afterClosed().subscribe({
-    //   next: (val) => {
-    //     if (val) {
-    //       this.getEmployeeList();
-    //     }
-    //   },
-    // });
+  public setPrivilegesGroupList(groupListDetails: any[]) {
+    try {
+      if (groupListDetails.length <= 0) {
+        return;
+      }
+
+      this.dataSource = new MatTableDataSource(groupListDetails);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    } catch (error) {
+      console.log(error);
+      this.handleCatch();
+    }
   }
 
-  getEmployeeList() {
-    // this._empService.getEmployeeList().subscribe({
-    //   next: (res) => {
-    //     this.dataSource = new MatTableDataSource(res);
-    //     this.dataSource.sort = this.sort;
-    //     this.dataSource.paginator = this.paginator;
-    //   },
-    //   error: console.log,
-    // });
+  public openPrivilegeGroupAddEditClick(): void {
+    try {
+      const dialogRef = this._dialog.open(PrivilegeGroupsAddEditComponent);
+      dialogRef.afterClosed().subscribe({
+        next: (val) => {
+          if (val) {
+            this.getPrivilegeGroupList();
+          }
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public handleCatch(): void {
+    this.dataSource = new MatTableDataSource([{}]);
+    this.dataSource.sort = null;
+    this.dataSource.paginator = null;
+  }
+
+  getPrivilegeGroupList() {
+    try {
+      this._privilegesService.getPrivilegeGroupList().then((response: any) => {
+        this.setPrivilegesGroupList(response);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   applyFilter(event: Event) {

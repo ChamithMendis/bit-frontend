@@ -15,12 +15,20 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { PrivilegeGroupsAddEditComponent } from './privilege-groups-add-edit/privilege-groups-add-edit.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     SystemPrivilegesComponent,
     PrivilegeGroupsComponent,
     TestComponent,
+    PrivilegeGroupsAddEditComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +43,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatSortModule,
   ],
 })
 export class PrivilegesModule {}

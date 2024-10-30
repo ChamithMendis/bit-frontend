@@ -2,7 +2,9 @@
   <mat-toolbar color="primary">
     <span>Privilege Groups</span>
     <span class="example-spacer"></span>
-    <button mat-raised-button color="primary-pink">ADD GROUP</button>
+    <button mat-raised-button (click)="openPrivilegeGroupAddEditClick()">
+      ADD GROUP
+    </button>
   </mat-toolbar>
 
   <div class="main-body">
