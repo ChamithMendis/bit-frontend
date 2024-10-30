@@ -46,8 +46,6 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
   ],

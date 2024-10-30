@@ -74,6 +74,16 @@ export const navItems: NavItem[] = [
   {
     displayName: 'System Privileges',
     iconName: 'layout-dashboard',
-    route: '/privileges//system-privileges',
+    route: '/privileges/system-privileges',
   },
+  {
+    displayName: 'Privilege Groups',
+    iconName: 'layout-dashboard',
+    route: '/privileges/privilege-groups',
+  },
+  // {
+  //   displayName: 'System Test',
+  //   iconName: 'layout-dashboard',
+  //   route: '/privileges/system-test',
+  // },
 ];
