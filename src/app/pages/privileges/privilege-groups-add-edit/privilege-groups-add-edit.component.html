@@ -1,5 +1,5 @@
 <div mat-dialog-title>
-  <h5>{{ operation }} Privilege Group</h5>
+  <h5>{{ data ? "Update" : "Add" }} Privilege Group</h5>
 </div>
 <form [formGroup]="privilegeGroupForm" (ngSubmit)="onFormSubmit()">
   <div mat-dialog-content class="content">

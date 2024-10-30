@@ -57,9 +57,9 @@ export class PrivilegesService {
       .toPromise();
   }
 
-  public deletePrivilegeGroup(id: number): Promise<any> {
+  public deletePrivilegeGroup(id: number, priviegeGroup: any): Promise<any> {
     const requestUrl =
-      environment.baseUrl + '/privilege-groups/' + id.toString();
+      environment.baseUrl + '/privilege-groups/delete/' + id.toString();
 
     let headers = {};
 
@@ -69,6 +69,8 @@ export class PrivilegesService {
       };
     }
 
-    return this.http.delete(requestUrl, { headers: headers }).toPromise();
+    return this.http
+      .put(requestUrl, priviegeGroup, { headers: headers })
+      .toPromise();
   }
 }

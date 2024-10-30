@@ -67,6 +67,33 @@ export class PrivilegeGroupsComponent implements OnInit {
     }
   }
 
+  public onEditPrivilageGroupClick(data: any): void {
+    const dialogRef = this._dialog.open(PrivilegeGroupsAddEditComponent, {
+      data,
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.getPrivilegeGroupList();
+        }
+      },
+    });
+  }
+
+  public onDeletePrivilageGroupClick(id: number, data: any): void {
+    try {
+      this._privilegesService
+        .deletePrivilegeGroup(id, data)
+        .then((response) => {
+          console.log(response);
+          this.getPrivilegeGroupList();
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   public handleCatch(): void {
     this.dataSource = new MatTableDataSource([{}]);
     this.dataSource.sort = null;

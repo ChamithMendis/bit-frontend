@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PrivilegesService } from 'src/app/services/privileges/privileges.service';
 
@@ -12,8 +12,6 @@ import { PrivilegesService } from 'src/app/services/privileges/privileges.servic
 export class PrivilegeGroupsAddEditComponent {
   privilegeGroupForm: FormGroup;
 
-  operation = 'Add';
-
   constructor(
     private _fb: FormBuilder,
     private _privilegesService: PrivilegesService,
@@ -21,8 +19,8 @@ export class PrivilegeGroupsAddEditComponent {
     @Inject(MAT_DIALOG_DATA) public data: any // private _coreService: CoreService
   ) {
     this.privilegeGroupForm = this._fb.group({
-      groupName: '',
-      groupDescription: '',
+      groupName: ['', [Validators.required]],
+      groupDescription: [''],
     });
   }
 
@@ -38,7 +36,12 @@ export class PrivilegeGroupsAddEditComponent {
       }
 
       if (this.data) {
-        // edit logic
+        this._privilegesService
+          .editPrivilegeGroup(this.data.id, this.privilegeGroupForm.value)
+          .then((response: any) => {
+            console.log(response);
+            this._dialogRef.close(true);
+          });
       } else {
         this._privilegesService
           .addPrivilegeGroup(this.privilegeGroupForm.value)
