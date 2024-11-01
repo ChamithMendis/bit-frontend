@@ -64,6 +64,7 @@
           mat-row
           *matRowDef="let row; columns: displayedColumns"
           [cdkContextMenuTriggerFor]="row_menu"
+          [ngClass]="{ highlight: selectedRowIndex == row.id }"
           (mouseup)="detectRightMouseClick($event, row)"
         ></tr>
 

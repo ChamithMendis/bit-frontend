@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AxiosService } from 'src/app/services/axios.service';
 import { CacheService } from 'src/app/services/CacheService';
+import { CommonDataServiceService } from 'src/app/services/common-data-service/common-data-service.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-remove-table',
@@ -21,17 +23,25 @@ export class AddRemoveTableComponent implements OnInit {
 
   constructor(
     private axiosService: AxiosService,
-    private cacheService: CacheService
+    private cacheService: CacheService,
+    private commonDataService: CommonDataServiceService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
     // table initialize
-    // this.axiosService.getSystemPrivileges().then((response: any) => {
-    //   this.sourceTableData.data = response.sourcePrivileges;
-    //   this.targetTableData.data = response.targetPrivileges;
-    //   this.sourceTableData.data = [...this.sourceTableData.data];
-    //   this.targetTableData.data = [...this.targetTableData.data];
-    // });
+    this.commonDataService
+      .getAvailablePrivilegeList('get', 'available-privileges', +this.data.id)
+      .then((responseSource: any) => {
+        this.sourceTableData.data = responseSource;
+        this.sourceTableData.data = [...this.sourceTableData.data];
+        this.commonDataService
+          .getAssignedPrivilegeList('get', 'assigned-privileges', +this.data.id)
+          .then((responseTarget: any) => {
+            this.targetTableData.data = responseTarget;
+            this.targetTableData.data = [...this.targetTableData.data];
+          });
+      });
   }
 
   isAllSourceSelected() {

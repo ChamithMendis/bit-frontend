@@ -27,6 +27,7 @@ export class PrivilegeGroupsComponent implements OnInit {
 
   rightPanelStyle: any = {};
   selectedRecord: any;
+  selectedRowIndex = -1;
 
   constructor(
     private _dialog: MatDialog,
@@ -125,6 +126,7 @@ export class PrivilegeGroupsComponent implements OnInit {
   }
 
   detectRightMouseClick($event: any, privilegeGroup: any) {
+    this.selectedRowIndex = privilegeGroup.id;
     if ($event.which === 3) {
       this.rightPanelStyle = {
         display: 'block',
@@ -145,7 +147,8 @@ export class PrivilegeGroupsComponent implements OnInit {
     try {
       const dialogRef = this._dialog.open(AddRemoveTableComponent, {
         height: '600px',
-        width: '600px',
+        width: '800px',
+        data: this.selectedRecord,
       });
       dialogRef.afterClosed().subscribe({
         next: (val) => {
