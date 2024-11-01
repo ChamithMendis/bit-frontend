@@ -1,0 +1,137 @@
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { AxiosService } from 'src/app/services/axios.service';
+import { CacheService } from 'src/app/services/CacheService';
+
+@Component({
+  selector: 'app-add-remove-table',
+  standalone: false,
+  templateUrl: './add-remove-table.component.html',
+  styleUrl: './add-remove-table.component.scss',
+})
+export class AddRemoveTableComponent implements OnInit {
+  sourceDisplayedColumns: string[] = ['sourceSelect', 'id', 'description'];
+  targetDisplayedColumns: string[] = ['targetSelect', 'id', 'description'];
+  sourceTableData = new MatTableDataSource<any>([]);
+  sourceSelection = new SelectionModel<any>(true, []);
+
+  targetTableData = new MatTableDataSource<any>([]);
+  targetSelection = new SelectionModel<any>(true, []);
+
+  constructor(
+    private axiosService: AxiosService,
+    private cacheService: CacheService
+  ) {}
+
+  ngOnInit(): void {
+    // table initialize
+    // this.axiosService.getSystemPrivileges().then((response: any) => {
+    //   this.sourceTableData.data = response.sourcePrivileges;
+    //   this.targetTableData.data = response.targetPrivileges;
+    //   this.sourceTableData.data = [...this.sourceTableData.data];
+    //   this.targetTableData.data = [...this.targetTableData.data];
+    // });
+  }
+
+  isAllSourceSelected() {
+    const numSelected = this.sourceSelection.selected.length;
+    const numRows = this.sourceTableData.data.length;
+    return numSelected === numRows;
+  }
+
+  isAllTargetSelected() {
+    const numSelected = this.targetSelection.selected.length;
+    const numRows = this.targetTableData.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear sourceSelection. */
+  toggleAllSourceRows() {
+    if (this.isAllSourceSelected()) {
+      this.sourceSelection.clear();
+      return;
+    }
+
+    this.sourceSelection.select(...this.sourceTableData.data);
+  }
+
+  toggleAllTargetRows() {
+    if (this.isAllTargetSelected()) {
+      this.targetSelection.clear();
+      return;
+    }
+    this.targetSelection.select(...this.targetTableData.data);
+  }
+
+  /** The label for the checkbox on the passed row */
+  sourceCheckboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSourceSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${
+      this.sourceSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.position + 1}`;
+  }
+
+  targetCheckboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllTargetSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${
+      this.targetSelection.isSelected(row) ? 'deselect' : 'select'
+    } row ${row.position + 1}`;
+  }
+
+  onSourceTableDataSelect(row?: any) {
+    console.log(row);
+  }
+  onTargetTableDataSelect(row?: any) {
+    console.log(row);
+  }
+
+  moveFromSourceToTarget() {
+    this.sourceSelection.selected.forEach((item) => {
+      const inputElement = {
+        id: item.id,
+        description: item.description,
+      };
+
+      this.targetTableData.data.push(inputElement);
+      this.sourceTableData.data = this.sourceTableData.data.filter(
+        (removingItem) => removingItem.id != item.id
+      );
+      this.sourceSelection.deselect(item);
+    });
+
+    this.targetTableData.data = [...this.targetTableData.data];
+  }
+  // moveAllFromSourceToTarget() {}
+  // moveAllFromTargetToSource() {}
+  moveFromTargetToSource() {
+    this.targetSelection.selected.forEach((item) => {
+      const inputElement = {
+        id: item.id,
+        description: item.description,
+      };
+
+      this.sourceTableData.data.push(inputElement);
+      this.targetTableData.data = this.targetTableData.data.filter(
+        (removingItem) => removingItem.id != item.id
+      );
+      this.targetSelection.deselect(item);
+    });
+
+    this.sourceTableData.data = [...this.sourceTableData.data];
+  }
+
+  saveData() {
+    console.log(this.targetTableData.data);
+    console.log(this.sourceTableData.data);
+
+    // this.axiosService.saveSystemPrivileges({
+    //   sourcePrivileges: this.sourceTableData.data,
+    //   targetPrivileges: this.targetTableData.data,
+    // });
+  }
+}

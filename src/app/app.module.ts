@@ -29,6 +29,7 @@ import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     BrowserAnimationsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
+    FontAwesomeModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

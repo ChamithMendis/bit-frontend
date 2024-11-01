@@ -22,6 +22,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
+import { CdkContextMenuTrigger, CdkMenuItem, CdkMenu } from '@angular/cdk/menu';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,10 @@ import { MatSortModule } from '@angular/material/sort';
     MatSelectModule,
     ReactiveFormsModule,
     MatSortModule,
+    CdkContextMenuTrigger,
+    CdkMenuItem,
+    CdkMenu,
+    MatMenuModule,
   ],
 })
 export class PrivilegesModule {}

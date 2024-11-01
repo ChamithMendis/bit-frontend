@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PrivilegesService } from 'src/app/services/privileges/privileges.service';
 import { PrivilegeGroupsAddEditComponent } from '../privilege-groups-add-edit/privilege-groups-add-edit.component';
+import { AddRemoveTableComponent } from '../../add-remove-table/add-remove-table.component';
 
 @Component({
   selector: 'app-privilege-groups',
@@ -24,6 +25,9 @@ export class PrivilegeGroupsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  rightPanelStyle: any = {};
+  selectedRecord: any;
+
   constructor(
     private _dialog: MatDialog,
     private _privilegesService: PrivilegesService // private _empService: EmployeeService, // private _coreService: CoreService
@@ -32,6 +36,7 @@ export class PrivilegeGroupsComponent implements OnInit {
   ngOnInit(): void {
     try {
       this.getPrivilegeGroupList();
+      this.closeContextMenu();
     } catch (error) {
       console.log(error);
     }
@@ -119,26 +124,39 @@ export class PrivilegeGroupsComponent implements OnInit {
     }
   }
 
-  deleteEmployee(id: number) {
-    // this._empService.deleteEmployee(id).subscribe({
-    //   next: (res) => {
-    //     this._coreService.openSnackBar('Employee deleted!', 'done');
-    //     this.getEmployeeList();
-    //   },
-    //   error: console.log,
-    // });
+  detectRightMouseClick($event: any, privilegeGroup: any) {
+    if ($event.which === 3) {
+      this.rightPanelStyle = {
+        display: 'block',
+        position: 'absolute',
+        'left.px': $event.clientX,
+        'top.px': $event.clientY,
+      };
+      this.selectedRecord = privilegeGroup;
+    }
   }
 
-  openEditForm(data: any) {
-    // const dialogRef = this._dialog.open(EmpAddEditComponent, {
-    //   data,
-    // });
-    // dialogRef.afterClosed().subscribe({
-    //   next: (val) => {
-    //     if (val) {
-    //       this.getEmployeeList();
-    //     }
-    //   },
-    // });
+  closeContextMenu() {
+    this.rightPanelStyle = {
+      display: 'none',
+    };
   }
+  onAddRemovePrivilegesClick() {
+    try {
+      const dialogRef = this._dialog.open(AddRemoveTableComponent, {
+        height: '600px',
+        width: '600px',
+      });
+      dialogRef.afterClosed().subscribe({
+        next: (val) => {
+          if (val) {
+            this.getPrivilegeGroupList();
+          }
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  onAddRemoveUsersClick() {}
 }
