@@ -10,7 +10,7 @@
       : false,
   }"
   class="menu-list-item"
-  *ngIf="!item.navCap"
+  *ngIf="item.isVisible && !item.navCap"
 >
   <i-tabler
     class="routeIcon"

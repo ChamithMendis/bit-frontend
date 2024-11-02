@@ -8,6 +8,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AxiosService } from 'src/app/services/axios.service';
+import { CacheService } from 'src/app/services/CacheService';
 
 @Component({
   selector: 'app-header',
@@ -26,11 +27,13 @@ export class HeaderComponent {
   constructor(
     public dialog: MatDialog,
     private axiosService: AxiosService,
-    private router: Router
+    private router: Router,
+    private cacheService: CacheService
   ) {}
 
   public logOutUser(): void {
     this.axiosService.removeToken();
+    this.cacheService.clear(this.axiosService.getUserId()!);
     this.router.navigate(['/authentication/login']);
   }
 }

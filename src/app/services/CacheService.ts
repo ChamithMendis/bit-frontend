@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { AxiosService } from './axios.service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CacheService {
+  constructor(private axiosService: AxiosService) {}
+
   // A HashMap to store the cache. The key is the page and the value is the data.
   private cache = new Map<string, any[]>();
   // BehaviorSubject that will contain the updated cache data.
@@ -15,9 +19,12 @@ export class CacheService {
     // We check if data already exists for this key.
     if (this.cache.has(key)) {
       // If it already exists, we throw an exception to prevent overwriting the data.
-      throw new Error(
-        `Data already exists for key '${key}'. Use a different key or delete the existing one first.`
-      );
+      // throw new Error(
+      //   `Data already exists for key '${key}'. Use a different key or delete the existing one first.`
+      // );
+
+      this.clear(key);
+      window.localStorage.removeItem('privileges');
     }
     // If there is no data for this key, we store it in the cache and update the BehaviorSubject.
     this.cache.set(key, data);
@@ -38,5 +45,16 @@ export class CacheService {
     // We remove the data from the cache and update the BehaviorSubject.
     this.cache.delete(key);
     this.cache$.next([]);
+  }
+
+  refreshCache(userId: string) {
+    this.axiosService.getAuthIds(+userId).then((data) => {
+      try {
+        this.set(userId, data);
+      } catch (error) {
+        console.error(error);
+        // handle the error as you prefer here
+      }
+    });
   }
 }

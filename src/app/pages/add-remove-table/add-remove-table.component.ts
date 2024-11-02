@@ -5,6 +5,7 @@ import { AxiosService } from 'src/app/services/axios.service';
 import { CacheService } from 'src/app/services/CacheService';
 import { CommonDataServiceService } from 'src/app/services/common-data-service/common-data-service.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { environment } from 'src/app/environments/environment';
 
 @Component({
   selector: 'app-add-remove-table',
@@ -21,6 +22,7 @@ export class AddRemoveTableComponent implements OnInit {
   targetSelection = new SelectionModel<any>(true, []);
   oldAvailableData: any;
   oldAssignedData: any;
+  isDisableButton = false;
 
   constructor(
     private axiosService: AxiosService,
@@ -160,7 +162,11 @@ export class AddRemoveTableComponent implements OnInit {
       addedData: addedData,
     };
 
-    this.commonDataService.saveData('post', url, body);
+    this.commonDataService.saveData('post', url, body).then((response: any) => {
+      this.cacheService.refreshCache(this.axiosService.getUserId()!);
+    });
+
+    this.isDisableButton = true;
   }
 
   public getRemovedItems() {

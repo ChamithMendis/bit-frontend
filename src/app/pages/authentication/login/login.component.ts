@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/app/environments/environment';
 import { AxiosService } from 'src/app/services/axios.service';
 import { CacheService } from 'src/app/services/CacheService';
 
@@ -65,9 +66,9 @@ export class AppSideLoginComponent implements OnInit {
         })
         .then((response) => {
           this.axiosService.setAuthToken(response.token);
-          this.router.navigate(['/dashboard']);
-
+          this.axiosService.setUserId(response.id);
           this.getData(response.id);
+          this.router.navigate(['/dashboard']);
         })
         .catch((error) => {
           this.userNamePasswordError = true;

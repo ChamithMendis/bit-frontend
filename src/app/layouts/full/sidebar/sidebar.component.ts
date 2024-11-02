@@ -27,10 +27,12 @@ export class SidebarComponent implements OnInit {
   }
 
   public setAuthStatusInNavItems(authId: number[]) {
-    if (authId.length > 0) {
+    if (authId && authId.length > 0) {
       navItems.forEach((element) => {
         if (authId.includes(element.auth!)) {
           element.isVisible = true;
+        } else {
+          element.isVisible = false;
         }
       });
     } else if (
@@ -42,7 +44,13 @@ export class SidebarComponent implements OnInit {
       navItems.forEach((element) => {
         if (privilegeArray.includes(element.auth!)) {
           element.isVisible = true;
+        } else {
+          element.isVisible = false;
         }
+      });
+    } else if (authId && authId.length === 0) {
+      navItems.forEach((element) => {
+        element.isVisible = false;
       });
     }
   }

@@ -20,6 +20,14 @@ export class AxiosService {
     }
   }
 
+  setUserId(id: number) {
+    window.localStorage.setItem('user_id', id.toString());
+  }
+
+  getUserId() {
+    return window.localStorage.getItem('user_id');
+  }
+
   removeToken() {
     window.localStorage.clear();
   }

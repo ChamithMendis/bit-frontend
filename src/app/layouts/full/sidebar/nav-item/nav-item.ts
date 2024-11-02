@@ -13,5 +13,5 @@ export interface NavItem {
   children?: NavItem[];
   ddType?: string;
   auth?: number;
-  isVisible?: boolean;
+  isVisible: boolean;
 }
