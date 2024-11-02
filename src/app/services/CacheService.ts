@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AxiosService } from './axios.service';
 import { environment } from '../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CacheService {
-  constructor(private axiosService: AxiosService) {}
+  constructor(private axiosService: AxiosService, private router: Router) {}
 
   // A HashMap to store the cache. The key is the page and the value is the data.
   private cache = new Map<string, any[]>();
@@ -30,6 +31,10 @@ export class CacheService {
     this.cache.set(key, data);
     this.cache$.next(this.cache.get(key)!);
     window.localStorage.setItem('privileges', JSON.stringify(data));
+
+    if (data && data.length == 0) {
+      this.router.navigate(['/not-authorized']);
+    }
   }
 
   // The 'get' method for retrieving data from the cache.
