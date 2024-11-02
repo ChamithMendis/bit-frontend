@@ -78,6 +78,7 @@ export class PrivilegeGroupsComponent implements OnInit {
       });
     } catch (error) {
       console.log(error);
+      this._messageService.showError('Action Failed!');
     }
   }
 

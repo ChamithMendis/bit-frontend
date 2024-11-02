@@ -21,14 +21,12 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Badge',
     iconName: 'rosette',
-    auth: authenticationEnum.Home_Badge,
     isVisible: false,
     route: '/ui-components/badge',
   },
   {
     displayName: 'Chips',
     iconName: 'poker-chip',
-    auth: authenticationEnum.Home_Chips,
     isVisible: false,
     route: '/ui-components/chips',
   },
@@ -53,17 +51,20 @@ export const navItems: NavItem[] = [
   {
     navCap: 'Auth',
     isVisible: false,
+    auth: authenticationEnum.Auth,
   },
   {
     displayName: 'Login',
     iconName: 'lock',
     route: '/authentication/login',
+    auth: authenticationEnum.Auth_Login,
     isVisible: true,
   },
   {
     displayName: 'Register',
     iconName: 'user-plus',
     route: '/authentication/register',
+    auth: authenticationEnum.Auth_Register,
     isVisible: true,
   },
   {
@@ -84,19 +85,21 @@ export const navItems: NavItem[] = [
   },
   {
     navCap: 'Privileges',
-    auth: authenticationEnum.Home, // change this
+    auth: authenticationEnum.Privileges, // change this
     isVisible: true,
   },
   {
     displayName: 'System Privileges',
     iconName: 'layout-dashboard',
     route: '/privileges/system-privileges',
+    auth: authenticationEnum.System_Privileges,
     isVisible: true,
   },
   {
     displayName: 'Privilege Groups',
     iconName: 'layout-dashboard',
     route: '/privileges/privilege-groups',
+    auth: authenticationEnum.Privilege_Groups,
     isVisible: true,
   },
   // {

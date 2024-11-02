@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AxiosService } from 'src/app/services/axios.service';
 import { CacheService } from 'src/app/services/CacheService';
+import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
 
 @Component({
   selector: 'app-system-privileges',
@@ -24,7 +25,8 @@ export class SystemPrivilegesComponent implements OnInit {
 
   constructor(
     private axiosService: AxiosService,
-    private cacheService: CacheService
+    private cacheService: CacheService,
+    private _messageService: MessageServiceService
   ) {}
 
   ngOnInit(): void {
@@ -131,10 +133,20 @@ export class SystemPrivilegesComponent implements OnInit {
   }
 
   saveData() {
-    this.axiosService.saveSystemPrivileges({
-      sourcePrivileges: this.sourceTableData.data,
-      targetPrivileges: this.targetTableData.data,
-    });
+    try {
+      this.axiosService
+        .saveSystemPrivileges({
+          sourcePrivileges: this.sourceTableData.data,
+          targetPrivileges: this.targetTableData.data,
+        })
+        .then((response) => {
+          this._messageService.showSuccess(
+            'System Privilege Changes Successfull!'
+          );
+        });
+    } catch (error) {
+      this._messageService.showError('Action Failed!');
+    }
   }
 
   resetData() {
