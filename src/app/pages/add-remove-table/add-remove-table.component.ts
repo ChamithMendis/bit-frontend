@@ -6,6 +6,7 @@ import { CacheService } from 'src/app/services/CacheService';
 import { CommonDataServiceService } from 'src/app/services/common-data-service/common-data-service.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { environment } from 'src/app/environments/environment';
+import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
 
 @Component({
   selector: 'app-add-remove-table',
@@ -28,7 +29,8 @@ export class AddRemoveTableComponent implements OnInit {
     private axiosService: AxiosService,
     private cacheService: CacheService,
     private commonDataService: CommonDataServiceService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _messageService: MessageServiceService
   ) {}
 
   ngOnInit(): void {

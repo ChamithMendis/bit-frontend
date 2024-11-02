@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PrivilegesService } from 'src/app/services/privileges/privileges.service';
 import { PrivilegeGroupsAddEditComponent } from '../privilege-groups-add-edit/privilege-groups-add-edit.component';
 import { AddRemoveTableComponent } from '../../add-remove-table/add-remove-table.component';
+import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
 
 @Component({
   selector: 'app-privilege-groups',
@@ -31,7 +32,8 @@ export class PrivilegeGroupsComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
-    private _privilegesService: PrivilegesService // private _empService: EmployeeService, // private _coreService: CoreService
+    private _privilegesService: PrivilegesService, // private _empService: EmployeeService, // private _coreService: CoreService
+    private _messageService: MessageServiceService
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +66,13 @@ export class PrivilegeGroupsComponent implements OnInit {
       dialogRef.afterClosed().subscribe({
         next: (val) => {
           if (val) {
-            this.getPrivilegeGroupList();
+            if (val) {
+              this.getPrivilegeGroupList();
+
+              this._messageService.showSuccess(
+                'Privilege group added successfully!'
+              );
+            }
           }
         },
       });
@@ -81,6 +89,9 @@ export class PrivilegeGroupsComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
+          this._messageService.showSuccess(
+            'Privilege group edited successfully!'
+          );
           this.getPrivilegeGroupList();
         }
       },

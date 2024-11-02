@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
 import { PrivilegesService } from 'src/app/services/privileges/privileges.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class PrivilegeGroupsAddEditComponent {
     private _fb: FormBuilder,
     private _privilegesService: PrivilegesService,
     private _dialogRef: MatDialogRef<PrivilegeGroupsAddEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any // private _coreService: CoreService
+    @Inject(MAT_DIALOG_DATA) public data: any, // private _coreService: CoreService
+    private _messageService: MessageServiceService
   ) {
     this.privilegeGroupForm = this._fb.group({
       groupName: ['', [Validators.required]],
