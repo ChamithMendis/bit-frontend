@@ -173,4 +173,13 @@ export class AddRemoveTableComponent implements OnInit {
       (item: any) => !this.sourceTableData.data.includes(item)
     );
   }
+
+  resetData() {
+    this.sourceTableData.data = this.oldAvailableData;
+    this.sourceTableData.data = [...this.sourceTableData.data];
+    this.sourceSelection.clear();
+    this.targetTableData.data = this.oldAssignedData;
+    this.targetTableData.data = [...this.targetTableData.data];
+    this.targetSelection.clear();
+  }
 }

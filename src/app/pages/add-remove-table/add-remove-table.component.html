@@ -1,5 +1,9 @@
 <div class="row p-1">
   <div class="col-md-5 w-100 h-100">
+    <mat-toolbar style="border: 1px solid blue" color="primary">
+      <span>Available Data</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
     <table mat-table [dataSource]="sourceTableData" class="mat-elevation-z8">
       <!-- Checkbox Column -->
       <ng-container matColumnDef="sourceSelect">
@@ -45,8 +49,8 @@
       ></tr>
     </table>
   </div>
-  <div class="col-md-1 w-100 h-100">
-    <div class="row m-1">
+  <div class="col-sm-1">
+    <div class="row p-1">
       <button
         type="button"
         class="btn btn-primary"
@@ -55,25 +59,7 @@
         >
       </button>
     </div>
-    <!-- <div class="row m-1">
-        <button
-          type="button"
-          class="btn btn-danger"
-          (click)="moveAllFromSourceToTarget()"
-        >
-          >>
-        </button>
-      </div> -->
-    <!-- <div class="row m-1">
-        <button
-          type="button"
-          class="btn btn-danger"
-          (click)="moveAllFromTargetToSource()"
-        >
-          <<
-        </button>
-      </div> -->
-    <div class="row m-1">
+    <div class="row p-1">
       <button
         type="button"
         class="btn btn-primary"
@@ -82,31 +68,12 @@
         <
       </button>
     </div>
-    <div class="row mb-1">
-      <button type="button" class="btn btn-primary" (click)="saveData()">
-        Save
-      </button>
-    </div>
-    <div class="row mb-1">
-      <button
-        type="button"
-        class="btn btn-primary"
-        (click)="moveFromTargetToSource()"
-      >
-        Reset
-      </button>
-    </div>
-    <div class="row">
-      <button
-        type="button"
-        class="btn btn-primary"
-        (click)="moveFromTargetToSource()"
-      >
-        Cancel
-      </button>
-    </div>
   </div>
   <div class="col-md-6 w-100 h-100">
+    <mat-toolbar style="border: 1px solid blue" color="primary">
+      <span>Assigned Data</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
     <table mat-table [dataSource]="targetTableData" class="mat-elevation-z8">
       <!-- Checkbox Column -->
       <ng-container matColumnDef="targetSelect">
@@ -151,5 +118,16 @@
         (click)="targetSelection.toggle(row)"
       ></tr>
     </table>
+  </div>
+</div>
+
+<div class="row p-1">
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-success m-1" (click)="saveData()">
+      Save
+    </button>
+    <button type="button" class="btn btn-danger m-1" (click)="resetData()">
+      Reset
+    </button>
   </div>
 </div>
