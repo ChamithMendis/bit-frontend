@@ -28,6 +28,13 @@ export class SidebarComponent implements OnInit {
 
   public setAuthStatusInNavItems(authId: number[]) {
     if (authId && authId.length > 0) {
+      if (authId.includes(1)) {
+        navItems.forEach((element) => {
+          element.isVisible = true;
+        });
+        return;
+      }
+
       navItems.forEach((element) => {
         if (authId.includes(element.auth!)) {
           element.isVisible = true;
@@ -41,6 +48,14 @@ export class SidebarComponent implements OnInit {
       const privilegeArray = JSON.parse(
         window.localStorage.getItem('privileges')!
       );
+
+      if (privilegeArray.includes(1)) {
+        navItems.forEach((element) => {
+          element.isVisible = true;
+        });
+        return;
+      }
+
       navItems.forEach((element) => {
         if (privilegeArray.includes(element.auth!)) {
           element.isVisible = true;
