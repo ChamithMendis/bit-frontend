@@ -19,6 +19,9 @@ export class SystemPrivilegesComponent implements OnInit {
   targetTableData = new MatTableDataSource<any>([]);
   targetSelection = new SelectionModel<any>(true, []);
 
+  oldSourceTableData: any;
+  oldTargetTableData: any;
+
   constructor(
     private axiosService: AxiosService,
     private cacheService: CacheService
@@ -30,6 +33,9 @@ export class SystemPrivilegesComponent implements OnInit {
       this.targetTableData.data = response.targetPrivileges;
       this.sourceTableData.data = [...this.sourceTableData.data];
       this.targetTableData.data = [...this.targetTableData.data];
+
+      this.oldSourceTableData = this.sourceTableData.data;
+      this.oldTargetTableData = this.targetTableData.data;
     });
   }
 
@@ -125,12 +131,18 @@ export class SystemPrivilegesComponent implements OnInit {
   }
 
   saveData() {
-    console.log(this.targetTableData.data);
-    console.log(this.sourceTableData.data);
-
     this.axiosService.saveSystemPrivileges({
       sourcePrivileges: this.sourceTableData.data,
       targetPrivileges: this.targetTableData.data,
     });
+  }
+
+  resetData() {
+    this.sourceTableData.data = this.oldSourceTableData;
+    this.sourceTableData.data = [...this.sourceTableData.data];
+    this.sourceSelection.clear();
+    this.targetTableData.data = this.oldTargetTableData;
+    this.targetTableData.data = [...this.targetTableData.data];
+    this.targetSelection.clear();
   }
 }
