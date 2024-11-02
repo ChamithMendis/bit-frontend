@@ -148,7 +148,12 @@ export class PrivilegeGroupsComponent implements OnInit {
       const dialogRef = this._dialog.open(AddRemoveTableComponent, {
         height: '600px',
         width: '800px',
-        data: this.selectedRecord,
+        data: {
+          selectedItem: this.selectedRecord,
+          assignedUrl: 'assigned-privileges',
+          availableUrl: 'available-privileges',
+          dataUrl: 'group-privileges',
+        },
       });
       dialogRef.afterClosed().subscribe({
         next: (val) => {

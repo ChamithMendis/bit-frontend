@@ -70,4 +70,22 @@ export class CommonDataServiceService implements OnInit {
       return this.http.get(requestUrl, { headers: headers }).toPromise();
     }
   }
+
+  public saveData(method: string, url: string, body: any): Promise<any> {
+    const requestUrl = environment.baseUrl + this.commonDataServiceUrl + url;
+
+    let headers = {};
+
+    if (this._axiosService.getAuthToken() !== null) {
+      headers = {
+        Authorization: 'Bearer ' + this._axiosService.getAuthToken(),
+      };
+    }
+
+    if (method === 'post') {
+      return this.http.post(requestUrl, body, { headers: headers }).toPromise();
+    } else {
+      return this.http.get(requestUrl, { headers: headers }).toPromise();
+    }
+  }
 }
