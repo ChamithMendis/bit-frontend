@@ -166,5 +166,27 @@ export class PrivilegeGroupsComponent implements OnInit {
       console.log(error);
     }
   }
-  onAddRemoveUsersClick() {}
+  onAddRemoveUsersClick() {
+    try {
+      const dialogRef = this._dialog.open(AddRemoveTableComponent, {
+        height: '600px',
+        width: '800px',
+        data: {
+          selectedItem: this.selectedRecord,
+          assignedUrl: 'group-assigned-users',
+          availableUrl: 'group-available-users',
+          dataUrl: 'privilege-group-users',
+        },
+      });
+      dialogRef.afterClosed().subscribe({
+        next: (val) => {
+          if (val) {
+            this.getPrivilegeGroupList();
+          }
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

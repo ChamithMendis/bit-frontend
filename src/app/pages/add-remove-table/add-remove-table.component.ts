@@ -174,7 +174,7 @@ export class AddRemoveTableComponent implements OnInit {
     );
   }
 
-  resetData() {
+  public resetData(): void {
     this.sourceTableData.data = this.oldAvailableData;
     this.sourceTableData.data = [...this.sourceTableData.data];
     this.sourceSelection.clear();
@@ -182,4 +182,6 @@ export class AddRemoveTableComponent implements OnInit {
     this.targetTableData.data = [...this.targetTableData.data];
     this.targetSelection.clear();
   }
+
+  public closeDialog() {}
 }

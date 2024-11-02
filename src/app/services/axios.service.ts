@@ -21,7 +21,7 @@ export class AxiosService {
   }
 
   removeToken() {
-    window.localStorage.removeItem('auth_token');
+    window.localStorage.clear();
   }
 
   request(method: string, url: string, data: any): Promise<any> {
@@ -47,7 +47,7 @@ export class AxiosService {
 
   public logOut(): void {
     this.request('GET', '/logout', {}).then((response) => {
-      window.localStorage.removeItem('auth_token');
+      window.localStorage.clear();
     });
   }
 
