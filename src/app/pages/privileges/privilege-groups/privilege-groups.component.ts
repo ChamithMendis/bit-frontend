@@ -7,6 +7,8 @@ import { PrivilegesService } from 'src/app/services/privileges/privileges.servic
 import { PrivilegeGroupsAddEditComponent } from '../privilege-groups-add-edit/privilege-groups-add-edit.component';
 import { AddRemoveTableComponent } from '../../add-remove-table/add-remove-table.component';
 import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
+import { AuthServiceService } from 'src/app/services/auth-service/auth-service.service';
+import { authenticationEnum } from 'src/app/guards/auth.enum';
 
 @Component({
   selector: 'app-privilege-groups',
@@ -33,16 +35,22 @@ export class PrivilegeGroupsComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _privilegesService: PrivilegesService, // private _empService: EmployeeService, // private _coreService: CoreService
-    private _messageService: MessageServiceService
+    private _messageService: MessageServiceService,
+    private _authService: AuthServiceService
   ) {}
 
   ngOnInit(): void {
     try {
+      this.checkAuthorization();
       this.getPrivilegeGroupList();
       this.closeContextMenu();
     } catch (error) {
       console.log(error);
     }
+  }
+
+  public checkAuthorization() {
+    this._authService.checkAuthorization(authenticationEnum.Privilege_Groups);
   }
 
   public setPrivilegesGroupList(groupListDetails: any[]) {

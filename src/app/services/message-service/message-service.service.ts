@@ -17,8 +17,8 @@ export class MessageServiceService {
   }
 
   showError(message: string, duration: number = 3000) {
-    this.toastrService.error('everything is broken', 'Major Error', {
-      timeOut: 3000,
+    this.toastrService.error(message, 'Major Error', {
+      timeOut: duration,
     });
   }
 }

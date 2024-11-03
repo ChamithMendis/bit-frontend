@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { environment } from 'src/app/environments/environment';
 import { AxiosService } from 'src/app/services/axios.service';
 import { CacheService } from 'src/app/services/CacheService';
+import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class AppSideLoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private axiosService: AxiosService,
-    private cacheService: CacheService
+    private cacheService: CacheService,
+    private _messageService: MessageServiceService
   ) {
     this.loginForm = this.formBuilder.group({
       loginName: ['', [Validators.required]],
@@ -41,14 +43,22 @@ export class AppSideLoginComponent implements OnInit {
 
     // If the data is not in cache, we retrieve it from the server and store it in the cache.
     if (!cachedData) {
-      this.axiosService.getAuthIds(userId).then((data) => {
-        try {
-          this.cacheService.set(userId.toString(), data);
-        } catch (error) {
-          console.error(error);
-          // handle the error as you prefer here
-        }
-      });
+      this.axiosService
+        .getAuthIds(userId)
+        .then((data: any) => {
+          try {
+            if (data.length > 0) {
+              this.cacheService.set(userId.toString(), data);
+            } else {
+              this._messageService.showError('User does not have privileges');
+            }
+          } catch (error) {
+            this._messageService.showError('Action Failed');
+          }
+        })
+        .catch((error) => {
+          this._messageService.showError('Action Failed');
+        });
     }
   }
 
