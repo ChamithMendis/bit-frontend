@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AxiosService } from 'src/app/services/axios.service';
 import { CacheService } from 'src/app/services/CacheService';
 import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-system-privileges',
@@ -23,6 +25,11 @@ export class SystemPrivilegesComponent implements OnInit {
   oldSourceTableData: any;
   oldTargetTableData: any;
 
+  @ViewChild('sourcePaginator') sourcePaginator!: MatPaginator;
+  @ViewChild('sourceSort') sourceSort!: MatSort;
+  @ViewChild('targetPaginator') targetPaginator!: MatPaginator;
+  @ViewChild('targeteSort') targeteSort!: MatSort;
+
   constructor(
     private axiosService: AxiosService,
     private cacheService: CacheService,
@@ -32,9 +39,14 @@ export class SystemPrivilegesComponent implements OnInit {
   ngOnInit(): void {
     this.axiosService.getSystemPrivileges().then((response: any) => {
       this.sourceTableData.data = response.sourcePrivileges;
-      this.targetTableData.data = response.targetPrivileges;
       this.sourceTableData.data = [...this.sourceTableData.data];
+      this.sourceTableData.sort = this.sourceSort;
+      this.sourceTableData.paginator = this.sourcePaginator;
+
+      this.targetTableData.data = response.targetPrivileges;
       this.targetTableData.data = [...this.targetTableData.data];
+      this.targetTableData.sort = this.targeteSort;
+      this.targetTableData.paginator = this.targetPaginator;
 
       this.oldSourceTableData = this.sourceTableData.data;
       this.oldTargetTableData = this.targetTableData.data;
