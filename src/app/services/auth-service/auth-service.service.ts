@@ -16,6 +16,13 @@ export class AuthServiceService {
       window.localStorage.getItem('privileges')!
     );
 
+    if (!authIdArray) {
+      this._messageService.showError(
+        'User is not authorize to access requested page'
+      );
+      return false;
+    }
+
     if (authIdArray.includes(1)) {
       return true;
     }
