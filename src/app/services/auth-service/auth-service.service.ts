@@ -22,7 +22,6 @@ export class AuthServiceService {
       this._messageService.showError(
         'User is not authorize to access requested page'
       );
-      this.router.navigate(['/dashboard']);
     }
     return authStatus;
   }

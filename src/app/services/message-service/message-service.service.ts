@@ -16,7 +16,7 @@ export class MessageServiceService {
     });
   }
 
-  showError(message: string, duration: number = 3000) {
+  showError(message: string, duration: number = 8000) {
     this.toastrService.error(message, 'Major Error', {
       timeOut: duration,
     });

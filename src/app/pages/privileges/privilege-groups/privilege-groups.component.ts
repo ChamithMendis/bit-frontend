@@ -31,6 +31,7 @@ export class PrivilegeGroupsComponent implements OnInit {
   rightPanelStyle: any = {};
   selectedRecord: any;
   selectedRowIndex = -1;
+  display = false;
 
   constructor(
     private _dialog: MatDialog,
@@ -42,15 +43,20 @@ export class PrivilegeGroupsComponent implements OnInit {
   ngOnInit(): void {
     try {
       this.checkAuthorization();
-      this.getPrivilegeGroupList();
-      this.closeContextMenu();
     } catch (error) {
       console.log(error);
     }
   }
 
   public checkAuthorization() {
-    this._authService.checkAuthorization(authenticationEnum.Privilege_Groups);
+    this.display = this._authService.checkAuthorization(
+      authenticationEnum.Privilege_Groups
+    );
+    if (!this.display) {
+      return;
+    }
+    this.getPrivilegeGroupList();
+    this.closeContextMenu();
   }
 
   public setPrivilegesGroupList(groupListDetails: any[]) {
