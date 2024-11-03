@@ -8,8 +8,8 @@ export enum authenticationEnum {
   Home_Dashboard = 3,
   Auth = 4,
   Auth_Login = 5,
-  Auth_Register = 7,
-  Privileges = 8,
+  Auth_Register = 6,
+  Privileges = 7,
   System_Privileges = 8,
-  Privilege_Groups = 8,
+  Privilege_Groups = 9,
 }

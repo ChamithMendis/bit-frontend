@@ -16,7 +16,11 @@ export class AuthServiceService {
       window.localStorage.getItem('privileges')!
     );
 
-    const authStatus = authIdArray.includes(authId.toString());
+    if (authIdArray.includes(1)) {
+      return true;
+    }
+
+    const authStatus = authIdArray.includes(authId);
 
     if (!authStatus) {
       this._messageService.showError(
