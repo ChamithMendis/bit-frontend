@@ -1,0 +1,46 @@
+<p [hidden]="hiddenValue">rooms works!</p>
+
+<div>Good morning {{name}}</div>
+<div [ngStyle]="{'color':rooms.availableRooms? 'green':'red'}" [innerText]="roomsCount"> </div>
+
+<button mat-raised-button color="primary" (click)="toggle()">Click me</button>
+
+<input type="text" [(ngModel)]="empName">
+<p>{{empName}}</p>
+
+<!-- <input type="text" (click)="typeValue($event.target.value)"> -->
+<input type="text" (input)="typeValue($event)">
+<pre>
+  <p> Type Value is - {{typeVal}}</p>
+<div *ngIf="rooms.availableRooms>0">
+ Room List {{roomList}}
+</div>
+
+</pre>
+
+<table>
+  <tr>
+    <th>index</th>
+    <th>Even / Odd</th>
+    <th>Type</th>
+    <th>Price</th>
+    <th>Amenti</th>
+    <th>Date</th>
+    <th>Rating</th>
+  </tr>
+  <tr [ngClass]="e? 'even':'odd'" *ngFor="let room of roomList | slice:0:3; let e = even; let o = odd; let i= index">
+
+    <td>{{i}}</td>
+    <td>{{e? "Even":"Odd"}}</td>
+    <td>{{room.roomType | uppercase}}</td>
+    <td>{{room.price | currency:"Rs."}}</td>
+    <td>{{room.amenities | titlecase}}</td>
+    <td>{{room.checkingTime | date:"shortDate"}}</td>
+    <td>{{room.rating | number }}</td>
+  </tr>
+</table>
+
+<button type="button" class="btn btn-primary"
+        tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  Simple demo
+</button>

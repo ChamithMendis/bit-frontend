@@ -1,7 +1,7 @@
 <div id="embody">
   <mat-grid-list class="" [cols]="12" rowHeight="5rem">
 
-    <mat-grid-tile [colspan]="4" [rowspan]="10">
+    <mat-grid-tile [colspan]="4" [rowspan]="9">
       <mat-card id="empcard">
         <mat-card-header>
           <mat-card-title>Employee Details</mat-card-title>
@@ -13,7 +13,8 @@
           <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
 
             <mat-form-field appearance="fill">
-              <mat-label><span style="color: white;">...</span> Employee Number <span style="color: white">...</span></mat-label>
+              <mat-label><span style="color: white;">...</span> Employee Number <span
+                  style="color: white">...</span></mat-label>
               <input matInput formControlName="number">
               <!-- Validation Error Messages -->
               <mat-error *ngIf="form.get('number')?.hasError('required')">
@@ -37,14 +38,14 @@
               </mat-error>
             </mat-form-field>
 
-               <mat-form-field>
+            <mat-form-field>
               <mat-label><span style="color: white">...</span>NIC <span style="color: white">...</span></mat-label>
               <input matInput formControlName="nic">
               <mat-error *ngIf="form.get('nic')?.hasError('required')">
                 Number is required.
               </mat-error>
             </mat-form-field>
-<!--
+            <!--
             <mat-form-field appearance="outline">
               <mat-label><span style="color: white">...</span>Gender <span style="color: white">...</span></mat-label>
               <mat-select formControlName="gender">
@@ -108,7 +109,7 @@
             </mat-form-field>
  -->
             <div id="butpanel">
-              <button id="addBtn" mat-raised-button  type="submit" >Add</button>
+              <button id="addBtn" mat-raised-button type="submit">Add</button>
             </div>
 
           </form>
@@ -120,7 +121,7 @@
 
 
 
-    <mat-grid-tile [colspan]="8" [rowspan]="6">
+    <mat-grid-tile [colspan]="8" [rowspan]="9">
       <mat-card id="emptable">
         <mat-card-header>
           <mat-card-title>All Employees </mat-card-title>
@@ -130,33 +131,49 @@
         </mat-card-header>
 
         <mat-card-content>
-          <!--          <mat-table [dataSource]="data" class="bgopacity">-->
 
-          <!--            <ng-container *ngFor="let column of columns; let i = index;" [matColumnDef]="column">-->
-          <!--              <mat-header-cell   *matHeaderCellDef>{{headers[i]}}</mat-header-cell>-->
-          <!--              <mat-cell    *matCellDef="let element">{{uiassist.getProperty(element,binders[i])}}</mat-cell>-->
-          <!--            </ng-container>-->
+          <div>
+            <table mat-table [dataSource]="dataSource">
 
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
 
-          <!--            <ng-container *ngFor="let cscolumn of cscolumns;let i = index;" [matColumnDef]="cscolumn">-->
-          <!--              <mat-header-cell *matHeaderCellDef>-->
-          <!--                <mat-form [formGroup]="csearch" class="csearch">-->
-          <!--                  <mat-form-field appearance="outline">-->
-          <!--                    <mat-label>{{csprompts[i]}}</mat-label>-->
-          <!--                    <input matInput [formControlName]="cscolumn"-->
-          <!--                           (keyup)="filterTable()">-->
-          <!--                  </mat-form-field>-->
-          <!--                </mat-form>-->
-          <!--              </mat-header-cell>-->
-          <!--            </ng-container>-->
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
 
-          <!--            <mat-header-row   *matHeaderRowDef="columns"></mat-header-row>-->
-          <!--            <mat-header-row  class="searchheader" *matHeaderRowDef="cscolumns"></mat-header-row>-->
-          <!--            <mat-row *matRowDef="let row; columns:columns;" (click)="fillForm(row)" [ngClass]="{'selected-row':row===selectedrow}"></mat-row>-->
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef> Weight </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              </ng-container>
 
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              </ng-container>
 
-          <!--          </mat-table>-->
-          <!--          <mat-paginator class="bgopacity" [length]="20" [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 20]"></mat-paginator>-->
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="age">
+                <th mat-header-cell *matHeaderCellDef> Age </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20]"
+                           showFirstLastButtons
+                           aria-label="Select page of the elements">
+            </mat-paginator>
+          </div>
 
         </mat-card-content>
       </mat-card>

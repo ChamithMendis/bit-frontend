@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Room, RoomList } from '../room';
+import { Room, RoomList } from '../../../entity/room';
 
 @Component({
   selector: 'app-rooms',
@@ -12,9 +12,10 @@ export class RoomsComponent {
   roomsCount: number = 40;
   name: string = "Hotel";
   empName: string = "Dilusha";
+  typeVal:any = "";
 
   rooms:Room = {
-    availableRooms:0,
+    availableRooms:1,
     totalRooms:10,
     bookedRooms:6
   }
@@ -26,6 +27,7 @@ export class RoomsComponent {
     photo: '',
     checkingTime: new Date('19-Oct-2024'),
     checkoutTime: new Date('20-Oct-2024'),
+    rating : 3.4,
   },
   {
     roomType: 'standard',
@@ -34,6 +36,7 @@ export class RoomsComponent {
     photo: '',
     checkingTime: new Date('19-Oct-2024'),
     checkoutTime: new Date('22-Oct-2024'),
+    rating:3.4,
   },
   {
     roomType: 'normal',
@@ -42,6 +45,7 @@ export class RoomsComponent {
     photo: '',
     checkingTime: new Date('19-Oct-2024'),
     checkoutTime: new Date('23-Oct-2024'),
+    rating:3.1,
   }
 ];
 
@@ -50,7 +54,7 @@ export class RoomsComponent {
   }
   typeValue(event:any) {
     console.log(event.target.value);
-
+    this.typeVal = event.target.value;
   }
 
 

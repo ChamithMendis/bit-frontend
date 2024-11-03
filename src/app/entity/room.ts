@@ -2,7 +2,6 @@ export interface Room{
   availableRooms:number; //? means optional
   bookedRooms:number;
   totalRooms:number;
-
 }
 
 export interface RoomList{
@@ -12,5 +11,6 @@ export interface RoomList{
   photo: string;
   checkingTime?:Date;
   checkoutTime?:Date;
+  rating:number;
 
 }

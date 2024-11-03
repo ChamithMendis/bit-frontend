@@ -31,8 +31,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { AppSamplePageComponent } from './pages/extra/sample-page/sample-page.component';
-import { RoomsComponent } from "./practicalsFCC/rooms/rooms.component";
+
 
 @NgModule({ declarations: [
         AppComponent,
@@ -42,7 +41,7 @@ import { RoomsComponent } from "./practicalsFCC/rooms/rooms.component";
         HeaderComponent,
         BrandingComponent,
         AppNavItemComponent,
-        RoomsComponent
+
     ],
     exports: [TablerIconsModule],
     bootstrap: [AppComponent],

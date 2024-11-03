@@ -50,16 +50,7 @@ export const navItems: NavItem[] = [
     iconName: 'user-plus',
     route: '/authentication/register',
   },
-  {
-    displayName: 'Employee',
-    iconName: 'man',
-    route: '/authentication/employee',
-  },
-  {
-    displayName: 'Angular Forms',
-    iconName: 'brand-angular',
-    route: '/authentication/angularForms',
-  },
+
   {
     navCap: 'Extra',
   },
@@ -73,4 +64,28 @@ export const navItems: NavItem[] = [
     iconName: 'aperture',
     route: '/extra/sample-page',
   },
+  {
+    navCap:'Test'
+  },
+  {
+    displayName: 'Rooms',
+    iconName: 'aperture',
+    route: '/test/rooms',
+  },
+  {
+    displayName: 'Angular Forms',
+    iconName: 'brand-angular',
+    route: '/test/AngularForms',
+  },
+   {
+    displayName: 'Employee',
+    iconName: 'man',
+    route: '/test/employee',
+  },
+  {
+    displayName: 'Test',
+    iconName: 'man',
+    route: '/test/test',
+  },
+
 ];

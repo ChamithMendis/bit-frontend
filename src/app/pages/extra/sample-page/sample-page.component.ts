@@ -101,6 +101,7 @@ export class AppSamplePageComponent implements OnInit, AfterViewInit {
 
     let addstatus:boolean=false;
       let addmessage:string="Server Not Found";
+
     this._empService.addEmployee(this.employee).then((responce: [] | undefined) => {
       console.log("Res-" + responce);
       console.log("Un-" + responce == undefined);
@@ -134,7 +135,7 @@ export class AppSamplePageComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','age'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

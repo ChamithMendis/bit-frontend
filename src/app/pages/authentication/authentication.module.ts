@@ -15,11 +15,8 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AuthenticationRoutes } from './authentication.routing';
 import { AppSideLoginComponent } from './login/login.component';
 import { AppSideRegisterComponent } from './register/register.component';
-import { EmployeeComponent } from './employee/employee.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AngularformsComponent } from './angularforms/angularforms.component';
- 
 
 @NgModule({
   imports: [
@@ -39,10 +36,8 @@ import { AngularformsComponent } from './angularforms/angularforms.component';
   ],
   declarations: [
     AppSideLoginComponent,
-    AppSideRegisterComponent,
-    EmployeeComponent,
-    AngularformsComponent
-   
+    AppSideRegisterComponent
+
   ],
 })
 export class AuthenticationModule {}
