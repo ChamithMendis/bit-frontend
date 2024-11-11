@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import {Component, ViewEncapsulation, ViewChild, OnInit} from '@angular/core';
 import {
   ApexChart,
   ChartComponent,
@@ -15,6 +15,8 @@ import {
   ApexMarkers,
   ApexResponsive,
 } from 'ng-apexcharts';
+import {authenticationEnum} from "../../guards/auth.enum";
+import {AuthServiceService} from "../../services/auth-service/auth-service.service";
 
 interface month {
   value: string;
@@ -130,7 +132,7 @@ const ELEMENT_DATA: productsData[] = [
   templateUrl: './dashboard.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppDashboardComponent {
+export class AppDashboardComponent implements OnInit {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
 
   public salesOverviewChart!: Partial<salesOverviewChart> | any;
@@ -221,7 +223,9 @@ export class AppDashboardComponent {
     },
   ];
 
-  constructor() {
+  display = false;
+
+  constructor(private _authService: AuthServiceService) {
     // sales overview chart
     this.salesOverviewChart = {
       series: [
@@ -400,5 +404,22 @@ export class AppDashboardComponent {
         },
       },
     };
+  }
+
+  ngOnInit(): void {
+    try {
+      this.checkAuthorization();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public checkAuthorization() {
+    this.display = this._authService.checkAuthorization(
+      authenticationEnum.Home_Dashboard
+    );
+    if (!this.display) {
+      return;
+    }
   }
 }

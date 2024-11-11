@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
-export class AxiosService {
+export class HttpService {
+
+  public userNameBehaviorSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   constructor(private http: HttpClient) {}
 
   getAuthToken(): string | null {
@@ -28,12 +31,29 @@ export class AxiosService {
     return window.localStorage.getItem('user_id');
   }
 
+  setLoginNameToCache(name: string) {
+    window.localStorage.setItem('user_name', name);
+    this.setUserName(name);
+  }
+
+  public setUserName(name: string): void {
+    this.userNameBehaviorSubject.next(name);
+  }
+
+  getLoginNameFromCache(): string | null {
+    return window.localStorage.getItem('user_name');
+  }
+
+  public getUserName(): Observable<string> {
+    return this.userNameBehaviorSubject.asObservable();
+  }
+
   removeToken() {
     window.localStorage.clear();
   }
 
   request(method: string, url: string, data: any): Promise<any> {
-    const requestUrl = environment.baseUrl + url;
+    const requestUrl = environment.baseUrl + url; // http://localhost:8080/login
 
     let headers = {};
 

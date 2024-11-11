@@ -12,4 +12,6 @@ export enum authenticationEnum {
   Privileges = 7,
   System_Privileges = 8,
   Privilege_Groups = 9,
+  Users = 10,
+  Test = 11
 }

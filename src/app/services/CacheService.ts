@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { AxiosService } from './axios.service';
+import { HttpService } from './http.service';
 import { environment } from '../environments/environment';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class CacheService {
-  constructor(private axiosService: AxiosService, private router: Router) {}
+  constructor(private httpService: HttpService, private router: Router) {}
 
   // A HashMap to store the cache. The key is the page and the value is the data.
   private cache = new Map<string, any[]>();
@@ -53,7 +53,7 @@ export class CacheService {
   }
 
   refreshCache(userId: string) {
-    this.axiosService.getAuthIds(+userId).then((data) => {
+    this.httpService.getAuthIds(+userId).then((data) => {
       try {
         this.set(userId, data);
       } catch (error) {

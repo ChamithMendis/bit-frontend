@@ -10,17 +10,17 @@ import { HttpService } from '../services/http.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(private httpService: HttpService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const authToken = this.httpService.getAuthToken();
-    if (authToken) {
-      return true;
+    const loggedInStatus = this.httpService.isLoggedIn;
+    if (loggedInStatus) {
+      this.router.navigate(['/authentication/login'], {
+        queryParams: { returnUrl: state.url },
+      });
+      return loggedInStatus;
     }
-    this.router.navigate(['/authentication/login'], {
-      queryParams: { returnUrl: state.url },
-    });
-    return false;
+    return !loggedInStatus;
   }
 }

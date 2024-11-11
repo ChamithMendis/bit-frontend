@@ -7,17 +7,17 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // import { AuthService } from '../services/auth.service';
-import { AxiosService } from '../services/axios.service';
+import { HttpService } from '../services/http.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private axiosService: AxiosService) {}
+  constructor(private httpService: HttpService) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const authToken = this.axiosService.getAuthToken();
+    const authToken = this.httpService.getAuthToken();
     if (authToken) {
       request = request.clone({
         setHeaders: {

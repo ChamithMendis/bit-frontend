@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment';
-import { AxiosService } from '../axios.service';
+import { HttpService } from '../http.service';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PrivilegesService {
-  constructor(private _axiosService: AxiosService, private http: HttpClient) {}
+  constructor(private httpService: HttpService, private http: HttpClient) {}
 
   public getPrivilegeGroupList(): Promise<any> {
     const requestUrl = environment.baseUrl + '/privilege-groups';
 
     let headers = {};
 
-    if (this._axiosService.getAuthToken() !== null) {
+    if (this.httpService.getAuthToken() !== null) {
       headers = {
-        Authorization: 'Bearer ' + this._axiosService.getAuthToken(),
+        Authorization: 'Bearer ' + this.httpService.getAuthToken(),
       };
     }
 
@@ -29,9 +29,9 @@ export class PrivilegesService {
 
     let headers = {};
 
-    if (this._axiosService.getAuthToken() !== null) {
+    if (this.httpService.getAuthToken() !== null) {
       headers = {
-        Authorization: 'Bearer ' + this._axiosService.getAuthToken(),
+        Authorization: 'Bearer ' + this.httpService.getAuthToken(),
       };
     }
 
@@ -46,9 +46,9 @@ export class PrivilegesService {
 
     let headers = {};
 
-    if (this._axiosService.getAuthToken() !== null) {
+    if (this.httpService.getAuthToken() !== null) {
       headers = {
-        Authorization: 'Bearer ' + this._axiosService.getAuthToken(),
+        Authorization: 'Bearer ' + this.httpService.getAuthToken(),
       };
     }
 
@@ -63,9 +63,9 @@ export class PrivilegesService {
 
     let headers = {};
 
-    if (this._axiosService.getAuthToken() !== null) {
+    if (this.httpService.getAuthToken() !== null) {
       headers = {
-        Authorization: 'Bearer ' + this._axiosService.getAuthToken(),
+        Authorization: 'Bearer ' + this.httpService.getAuthToken(),
       };
     }
 

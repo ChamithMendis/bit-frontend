@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { AxiosService } from 'src/app/services/axios.service';
+import { HttpService } from 'src/app/services/http.service';
 import { CacheService } from 'src/app/services/CacheService';
 import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -31,13 +31,13 @@ export class SystemPrivilegesComponent implements OnInit {
   @ViewChild('targeteSort') targeteSort!: MatSort;
 
   constructor(
-    private axiosService: AxiosService,
+    private httpService: HttpService,
     private cacheService: CacheService,
     private _messageService: MessageServiceService
   ) {}
 
   ngOnInit(): void {
-    this.axiosService.getSystemPrivileges().then((response: any) => {
+    this.httpService.getSystemPrivileges().then((response: any) => {
       this.sourceTableData.data = response.sourcePrivileges;
       this.sourceTableData.data = [...this.sourceTableData.data];
       this.sourceTableData.sort = this.sourceSort;
@@ -146,7 +146,7 @@ export class SystemPrivilegesComponent implements OnInit {
 
   saveData() {
     try {
-      this.axiosService
+      this.httpService
         .saveSystemPrivileges({
           sourcePrivileges: this.sourceTableData.data,
           targetPrivileges: this.targetTableData.data,

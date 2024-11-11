@@ -6,7 +6,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AxiosService } from 'src/app/services/axios.service';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +20,7 @@ export class AppSideRegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private axiosService: AxiosService
+    private httpService: HttpService
   ) {
     this.registerForm = this.formBuilder.group({
       firstName: ['', [Validators.required]],
@@ -31,7 +31,7 @@ export class AppSideRegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.axiosService
+    // this.httpService
     //   .request('GET', '/messages', null)
     //   .then((response: any) => {
     //     this.data = response;
@@ -45,7 +45,7 @@ export class AppSideRegisterComponent implements OnInit {
   onSubmitRegister() {
     this.submitted = true;
     if (this.registerForm?.valid) {
-      this.axiosService
+      this.httpService
         .request('POST', '/register', {
           firstName: this.registerForm.value.firstName,
           lastName: this.registerForm.value.lastName,
@@ -53,7 +53,7 @@ export class AppSideRegisterComponent implements OnInit {
           password: this.registerForm.value.password,
         })
         .then((response: any) => {
-          this.axiosService.setAuthToken(response.token);
+          this.httpService.setAuthToken(response.token);
           this.router.navigate(['/authentication/login']);
         });
     }

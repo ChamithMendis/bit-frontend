@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { AxiosService } from 'src/app/services/axios.service';
+import { HttpService } from 'src/app/services/http.service';
 import { CacheService } from 'src/app/services/CacheService';
 import { CommonDataServiceService } from 'src/app/services/common-data-service/common-data-service.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -26,7 +26,7 @@ export class AddRemoveTableComponent implements OnInit {
   isDisableButton = false;
 
   constructor(
-    private axiosService: AxiosService,
+    private httpService: HttpService,
     private cacheService: CacheService,
     private commonDataService: CommonDataServiceService,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -165,7 +165,7 @@ export class AddRemoveTableComponent implements OnInit {
     };
 
     this.commonDataService.saveData('post', url, body).then((response: any) => {
-      this.cacheService.refreshCache(this.axiosService.getUserId()!);
+      this.cacheService.refreshCache(this.httpService.getUserId()!);
     });
 
     this.isDisableButton = true;

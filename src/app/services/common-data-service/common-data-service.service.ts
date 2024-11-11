@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { environment } from 'src/app/environments/environment';
-import { AxiosService } from '../axios.service';
+import { HttpService } from '../http.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { AxiosService } from '../axios.service';
 export class CommonDataServiceService implements OnInit {
   public commonDataServiceUrl = '/common-data-service/';
 
-  constructor(private _axiosService: AxiosService, private http: HttpClient) {}
+  constructor(private httpService: HttpService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.initializeComponent();
@@ -31,9 +31,9 @@ export class CommonDataServiceService implements OnInit {
 
     let headers = {};
 
-    if (this._axiosService.getAuthToken() !== null) {
+    if (this.httpService.getAuthToken() !== null) {
       headers = {
-        Authorization: 'Bearer ' + this._axiosService.getAuthToken(),
+        Authorization: 'Bearer ' + this.httpService.getAuthToken(),
       };
     }
 
@@ -58,9 +58,9 @@ export class CommonDataServiceService implements OnInit {
 
     let headers = {};
 
-    if (this._axiosService.getAuthToken() !== null) {
+    if (this.httpService.getAuthToken() !== null) {
       headers = {
-        Authorization: 'Bearer ' + this._axiosService.getAuthToken(),
+        Authorization: 'Bearer ' + this.httpService.getAuthToken(),
       };
     }
 
@@ -76,9 +76,9 @@ export class CommonDataServiceService implements OnInit {
 
     let headers = {};
 
-    if (this._axiosService.getAuthToken() !== null) {
+    if (this.httpService.getAuthToken() !== null) {
       headers = {
-        Authorization: 'Bearer ' + this._axiosService.getAuthToken(),
+        Authorization: 'Bearer ' + this.httpService.getAuthToken(),
       };
     }
 
