@@ -30,9 +30,6 @@ import { AppSideRegisterComponent } from './register/register.component';
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
   ],
-  declarations: [
-    AppSideLoginComponent,
-    AppSideRegisterComponent,
-  ],
+  declarations: [AppSideLoginComponent, AppSideRegisterComponent],
 })
 export class AuthenticationModule {}

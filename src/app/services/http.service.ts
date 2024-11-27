@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, Observable} from "rxjs";
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
-
-  public userNameBehaviorSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public userNameBehaviorSubject: BehaviorSubject<string> =
+    new BehaviorSubject<string>('');
   constructor(private http: HttpClient) {}
 
   getAuthToken(): string | null {

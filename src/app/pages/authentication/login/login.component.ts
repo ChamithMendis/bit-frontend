@@ -48,10 +48,10 @@ export class AppSideLoginComponent implements OnInit {
           try {
             if (data.length > 0) {
               this.cacheService.set(userId.toString(), data);
+              this.router.navigate(['/dashboard']);
             } else {
               this._messageService.showError('User does not have privileges');
             }
-            this.router.navigate(['/dashboard']);
           } catch (error) {
             this._messageService.showError('Action Failed');
           }
